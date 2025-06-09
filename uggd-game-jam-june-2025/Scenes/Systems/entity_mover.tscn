@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqwvh2fxx0nq4"]
+
+[ext_resource type="Script" uid="uid://c3sv5pa7873ul" path="res://Scripts/Systems/entity_mover.gd" id="1_5c4wm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c4wm"]
+size = Vector3(2, 1, 2)
+
+[node name="EntityMover" type="Node3D"]
+script = ExtResource("1_5c4wm")
+move_delay = 5.0
+move_now = true
+range_x = 1.0
+range_z = 1.0
+
+[node name="RangeShower" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5c4wm")
+debug_color = Color(1, 0.6, 0, 1)
+debug_fill = false
+
+[node name="MovementDelay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="MovementDelay" to="." method="_on_movement_delay_timeout"]

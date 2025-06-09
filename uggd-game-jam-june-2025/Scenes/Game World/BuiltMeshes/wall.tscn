@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5k3mj7fjvpqn"]
+
+[ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="1_8aw5b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv0hp"]
+albedo_texture = ExtResource("1_8aw5b")
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a20rb"]
+material = SubResource("StandardMaterial3D_cv0hp")
+size = Vector2(12, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0g63t"]
+diffuse_mode = 3
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kw1ji"]
+material = SubResource("StandardMaterial3D_0g63t")
+size = Vector2(12, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8aw5b"]
+size = Vector3(12, 0.25, 7.95026)
+
+[node name="Wall" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_a20rb")
+
+[node name="LowerIncline" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.18, 0.403)
+mesh = SubResource("PlaneMesh_a20rb")
+skeleton = NodePath("../..")
+
+[node name="MainWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332492, 4)
+mesh = SubResource("PlaneMesh_kw1ji")
+
+[node name="UpperInner" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.74846e-07, 7.825)
+mesh = SubResource("PlaneMesh_a20rb")
+skeleton = NodePath("../..")
+
+[node name="UpperIncline" type="MeshInstance3D" parent="UpperInner"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.18, -0.422)
+mesh = SubResource("PlaneMesh_a20rb")
+skeleton = NodePath("../../..")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.74228e-08, 3.72617)
+shape = SubResource("BoxShape3D_8aw5b")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false

@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk0yfoujgaeps"]
+
+[ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_oj1ra"]
+[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/BuiltMeshes/pillar.tscn" id="2_fnqxb"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/BuiltMeshes/wall.tscn" id="3_oj1ra"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oj1ra"]
+material = ExtResource("1_oj1ra")
+size = Vector2(12, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oj1ra"]
+size = Vector3(12, 0, 12)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xwshf"]
+material = ExtResource("1_oj1ra")
+size = Vector2(13, 13)
+
+[node name="LargeHall" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_oj1ra")
+
+[node name="Collision" type="StaticBody3D" parent="Floor"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Floor/Collision"]
+shape = SubResource("BoxShape3D_oj1ra")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 7.92122, 0)
+mesh = SubResource("PlaneMesh_xwshf")
+
+[node name="Pillar" type="Node3D" parent="."]
+
+[node name="Pillar1" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar2" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar3" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar5" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar6" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar7" parent="Pillar" instance=ExtResource("2_fnqxb")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Wall1" parent="Walls" instance=ExtResource("3_oj1ra")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25, 6)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("3_oj1ra")]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 0.25, -6)

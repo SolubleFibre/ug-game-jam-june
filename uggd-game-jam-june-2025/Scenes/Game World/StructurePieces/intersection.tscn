@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://rbmyhb3m8gk2"]
+
+[ext_resource type="Script" uid="uid://n7oknrgehgr3" path="res://Scripts/StructurePieces/intersection.gd" id="1_4xo43"]
+[ext_resource type="PackedScene" uid="uid://bh8h28nsxx0tx" path="res://Scenes/Game World/Sections/corridor.tscn" id="1_rmvt5"]
+[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="2_4fo5k"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_cbhw5"]
+
+[sub_resource type="Gradient" id="Gradient_qorgb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xwshf"]
+noise_type = 2
+frequency = 0.001
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cbhw5"]
+as_normal_map = true
+bump_strength = 20.0
+color_ramp = SubResource("Gradient_qorgb")
+noise = SubResource("FastNoiseLite_xwshf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xo43"]
+albedo_texture = ExtResource("2_4fo5k")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = SubResource("NoiseTexture2D_cbhw5")
+uv1_scale = Vector3(4, 4, 4)
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lsamj"]
+material = SubResource("StandardMaterial3D_4xo43")
+size = Vector2(4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ng6bi"]
+size = Vector3(4, 0, 4)
+
+[node name="Intersection" type="Node3D"]
+script = ExtResource("1_4xo43")
+
+[node name="AdjacentCorridors" type="Node3D" parent="."]
+
+[node name="Corridor1" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Corridor2" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Corridor3" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 8)
+
+[node name="Corridor4" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -8)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_lsamj")
+
+[node name="Collision" type="StaticBody3D" parent="Floor"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Floor/Collision"]
+shape = SubResource("BoxShape3D_ng6bi")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 8, 0)
+mesh = SubResource("PlaneMesh_lsamj")
+
+[node name="CorridorEnds" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, 0)
+
+[node name="Wall1" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(0.5, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 300, 2)
+skeleton = NodePath("")
+
+[node name="Wall2" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-0.5, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 1.18021e-06, 300, -25)
+skeleton = NodePath("")
+
+[node name="Wall3" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-2.18557e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.5, 4.37114e-08, 1.91069e-15, 13.5, 300, -11.5)
+skeleton = NodePath("")
+
+[node name="Wall4" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-2.18557e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0.5, 4.37114e-08, 1.91069e-15, -13.5, 300, -11.5)
+skeleton = NodePath("")

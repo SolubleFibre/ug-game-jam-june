@@ -1,10 +1,11 @@
-[gd_scene load_steps=50 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=53 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
 [ext_resource type="Shader" uid="uid://chrlj6r1ag25c" path="res://Misc/Shaders/pool_fluid.tres" id="2_vqj53"]
 [ext_resource type="Texture2D" uid="uid://dv3ekftn4ix54" path="res://Assets/2D/Symbol.png" id="3_mwm40"]
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_ue03e"]
 [ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="4_kepsw"]
+[ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="5_whnno"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqto"]
 resource_name = "material_0"
@@ -453,6 +454,14 @@ _data = {
 &"symbol": SubResource("Animation_fb6wk")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv0hp"]
+albedo_texture = ExtResource("5_whnno")
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a20rb"]
+material = SubResource("StandardMaterial3D_cv0hp")
+size = Vector2(3, 0.5)
+
 [node name="DarkPool" type="Node3D"]
 
 [node name="PoolFloor" type="MeshInstance3D" parent="."]
@@ -512,9 +521,11 @@ autoplay = "calm"
 
 [node name="Wall1" parent="Walls" instance=ExtResource("3_ue03e")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 6)
+mesh = SubResource("PlaneMesh_a20rb")
 
 [node name="Wall2" parent="Walls" instance=ExtResource("3_ue03e")]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, -6)
+mesh = SubResource("PlaneMesh_a20rb")
 
 [node name="Pillars" type="Node3D" parent="."]
 

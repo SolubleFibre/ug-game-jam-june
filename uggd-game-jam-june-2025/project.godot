@@ -13,6 +13,8 @@ config_version=5
 config/name="UGGD-Game-Jam-June-2025"
 run/main_scene="uid://dwrngc1od1182"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [display]

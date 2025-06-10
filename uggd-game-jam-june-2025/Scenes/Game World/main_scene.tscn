@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwrngc1od1182"]
+[gd_scene load_steps=10 format=3 uid="uid://dwrngc1od1182"]
 
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="2_bqo8f"]
 [ext_resource type="PackedScene" uid="uid://bh8h28nsxx0tx" path="res://Scenes/Game World/Sections/corridor.tscn" id="2_dbc8c"]
 [ext_resource type="PackedScene" uid="uid://yysy482oswx2" path="res://Scenes/Player/player.tscn" id="2_jk7sn"]
 [ext_resource type="PackedScene" uid="uid://dmslrd2kpvp8u" path="res://Scenes/Game World/StructurePieces/door_wall.tscn" id="3_jk7sn"]
+[ext_resource type="PackedScene" uid="uid://rbmyhb3m8gk2" path="res://Scenes/Game World/StructurePieces/intersection.tscn" id="4_bqo8f"]
+[ext_resource type="PackedScene" uid="uid://b2vx1vbwh4lbd" path="res://Scenes/Game World/StructurePieces/randomly_closing_door.tscn" id="5_vkf2p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -59,6 +61,13 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0
 
 [node name="DooredWall" parent="Pixelizer/SubViewport/MainHall/Corridor2" instance=ExtResource("3_jk7sn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="Intersection1" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+state = 1
+
+[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 0, 0)
 
 [node name="Player" parent="Pixelizer/SubViewport" instance=ExtResource("2_jk7sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.86139, 1.29353, 0)

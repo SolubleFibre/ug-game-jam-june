@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh8h28nsxx0tx"]
+[gd_scene load_steps=9 format=3 uid="uid://bh8h28nsxx0tx"]
 
 [ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="1_nll8a"]
-[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="2_nll8a"]
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_1uj41"]
 
 [sub_resource type="Gradient" id="Gradient_qorgb"]
@@ -47,33 +46,6 @@ debug_fill = false
 [node name="Roof" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 8, 0)
 mesh = SubResource("PlaneMesh_oj1ra")
-
-[node name="Pillars" type="Node3D" parent="."]
-visible = false
-
-[node name="Pillar1" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, 4.25)
-skeleton = NodePath("../..")
-
-[node name="Pillar2" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, 4.25)
-skeleton = NodePath("../..")
-
-[node name="Pillar3" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, 4.25)
-skeleton = NodePath("../..")
-
-[node name="Pillar5" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, -4.25)
-skeleton = NodePath("../..")
-
-[node name="Pillar6" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, -4.25)
-skeleton = NodePath("../..")
-
-[node name="Pillar7" parent="Pillars" instance=ExtResource("2_nll8a")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, -4.25)
-skeleton = NodePath("../..")
 
 [node name="Walls" type="Node3D" parent="."]
 

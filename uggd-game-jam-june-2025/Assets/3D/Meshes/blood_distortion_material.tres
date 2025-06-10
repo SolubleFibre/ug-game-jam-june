@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://bpkk70pydelk5"]
+
+[ext_resource type="Material" uid="uid://d0mu8n5obku8r" path="res://Assets/Materials/simple_blood.tres" id="1_gjv5q"]
+[ext_resource type="Shader" uid="uid://cjgedaqtjjbuq" path="res://Misc/Shaders/blood.tres" id="1_ytw6k"]
+
+[sub_resource type="Gradient" id="Gradient_688ta"]
+offsets = PackedFloat32Array(0, 0.505376, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.75339, 2.38247e-06, 5.77569e-07, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iv4dk"]
+noise_type = 3
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_357hs"]
+seamless = true
+color_ramp = SubResource("Gradient_688ta")
+noise = SubResource("FastNoiseLite_iv4dk")
+
+[sub_resource type="Gradient" id="Gradient_fl080"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hy4pu"]
+noise_type = 3
+frequency = 0.0016
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l5fx1"]
+seamless = true
+color_ramp = SubResource("Gradient_fl080")
+noise = SubResource("FastNoiseLite_hy4pu")
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_gjv5q")
+shader = ExtResource("1_ytw6k")
+shader_parameter/WaveMoveSpeed = 1.0
+shader_parameter/WavePattern = SubResource("NoiseTexture2D_l5fx1")
+shader_parameter/HeightMultiplier = Vector3(0.3, 0.4, 0)
+shader_parameter/MovementSpeed = 0.01
+shader_parameter/BloodTexture = SubResource("NoiseTexture2D_357hs")
+shader_parameter/BloodVisible = true
+shader_parameter/Backlighting = 1.0

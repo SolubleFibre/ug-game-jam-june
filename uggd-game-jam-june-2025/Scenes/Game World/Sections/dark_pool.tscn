@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=50 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
 [ext_resource type="Shader" uid="uid://chrlj6r1ag25c" path="res://Misc/Shaders/pool_fluid.tres" id="2_vqj53"]
-[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/BuiltMeshes/wall.tscn" id="3_ue03e"]
-[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/BuiltMeshes/pillar.tscn" id="4_kepsw"]
+[ext_resource type="Texture2D" uid="uid://dv3ekftn4ix54" path="res://Assets/2D/Symbol.png" id="3_mwm40"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_ue03e"]
+[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="4_kepsw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqto"]
 resource_name = "material_0"
@@ -65,7 +66,7 @@ subdivide_depth = 32
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ue03e"]
 noise_type = 3
-frequency = 0.0046
+frequency = 0.0078
 fractal_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kepsw"]
@@ -73,17 +74,17 @@ seamless = true
 color_ramp = SubResource("Gradient_vqj53")
 noise = SubResource("FastNoiseLite_ue03e")
 
-[sub_resource type="Gradient" id="Gradient_op3pd"]
+[sub_resource type="Gradient" id="Gradient_whnno"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fb6wk"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_op3pd"]
 noise_type = 2
 fractal_type = 0
 cellular_distance_function = 1
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_83q07"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fb6wk"]
 seamless = true
-color_ramp = SubResource("Gradient_op3pd")
-noise = SubResource("FastNoiseLite_fb6wk")
+color_ramp = SubResource("Gradient_whnno")
+noise = SubResource("FastNoiseLite_op3pd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4whl3"]
 render_priority = 0
@@ -92,8 +93,365 @@ shader_parameter/WavePanning = Vector2(-0.05, -0.05)
 shader_parameter/Heightmap = SubResource("NoiseTexture2D_kepsw")
 shader_parameter/HeightMultiplier = Vector3(0, 0.3, 0)
 shader_parameter/TexturePan = Vector2(0.01, 0.01)
-shader_parameter/Texture = SubResource("NoiseTexture2D_83q07")
-shader_parameter/EmissionStrength = 3.0
+shader_parameter/Texture = SubResource("NoiseTexture2D_fb6wk")
+shader_parameter/EmissionStrength = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kepsw"]
+top_radius = 6.0
+bottom_radius = 3.5
+height = 9.0
+radial_segments = 8
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_mwm40"]
+offsets = PackedFloat32Array(0.511111, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_whnno"]
+gradient = SubResource("Gradient_mwm40")
+fill_from = Vector2(0.521739, 1)
+fill_to = Vector2(0.507246, 0.155797)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_op3pd"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_whnno")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_83q07"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4whl3"]
+parameter_name = "Texture"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_puanv"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1l5xy"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_icete"]
+parameter_name = "TexturePan"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_bg7eh"]
+parameter_name = "EmissionStrength"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8uaxy"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_jq4e2"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_mi176"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_j4hei"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_pf8qr"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec3Parameter" id="VisualShaderNodeVec3Parameter_w7vbh"]
+parameter_name = "HeightMultiplier"
+default_value_enabled = true
+default_value = Vector3(0, 1, 0)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_j00wu"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_j1rac"]
+parameter_name = "Heightmap"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_vjswu"]
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_svdoc"]
+parameter_name = "WavePanning"
+
+[sub_resource type="VisualShader" id="VisualShader_3a8hp"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec2 WavePanning;
+uniform sampler2D Heightmap;
+uniform vec3 HeightMultiplier = vec3(0.000000, 1.000000, 0.000000);
+uniform vec2 TexturePan;
+uniform sampler2D Texture : source_color;
+uniform float EmissionStrength;
+
+
+
+void vertex() {
+// Vector2Parameter:9
+	vec2 n_out9p0 = WavePanning;
+
+
+// Input:10
+	float n_out10p0 = TIME;
+
+
+// UVFunc:8
+	vec2 n_out8p0 = vec2(n_out10p0) * n_out9p0 + UV;
+
+
+	vec4 n_out6p0;
+// Texture2D:6
+	n_out6p0 = texture(Heightmap, n_out8p0);
+
+
+// Vector3Parameter:5
+	vec3 n_out5p0 = HeightMultiplier;
+
+
+// VectorOp:4
+	vec3 n_out4p0 = vec3(n_out6p0.xyz) * n_out5p0;
+
+
+// Input:3
+	vec3 n_out3p0 = VERTEX;
+
+
+// VectorOp:2
+	vec3 n_out2p0 = n_out4p0 + n_out3p0;
+
+
+// Output:0
+	VERTEX = n_out2p0;
+
+
+}
+
+void fragment() {
+// Vector2Parameter:6
+	vec2 n_out6p0 = TexturePan;
+
+
+// Input:5
+	float n_out5p0 = TIME;
+
+
+// UVFunc:4
+	vec2 n_out4p0 = vec2(n_out5p0) * n_out6p0 + UV;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(Texture, n_out4p0);
+
+
+// FloatParameter:7
+	float n_out7p0 = EmissionStrength;
+
+
+// FloatOp:8
+	float n_out8p0 = n_out2p0.x * n_out7p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	EMISSION = vec3(n_out8p0);
+
+
+}
+"
+nodes/vertex/2/node = SubResource("VisualShaderNodeVectorOp_mi176")
+nodes/vertex/2/position = Vector2(160, 100)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_j4hei")
+nodes/vertex/3/position = Vector2(-80, 220)
+nodes/vertex/4/node = SubResource("VisualShaderNodeVectorOp_pf8qr")
+nodes/vertex/4/position = Vector2(-80, 40)
+nodes/vertex/5/node = SubResource("VisualShaderNodeVec3Parameter_w7vbh")
+nodes/vertex/5/position = Vector2(-520, 160)
+nodes/vertex/6/node = SubResource("VisualShaderNodeTexture_j00wu")
+nodes/vertex/6/position = Vector2(-380, -40)
+nodes/vertex/7/node = SubResource("VisualShaderNodeTexture2DParameter_j1rac")
+nodes/vertex/7/position = Vector2(-780, -40)
+nodes/vertex/8/node = SubResource("VisualShaderNodeUVFunc_vjswu")
+nodes/vertex/8/position = Vector2(-580, -280)
+nodes/vertex/9/node = SubResource("VisualShaderNodeVec2Parameter_svdoc")
+nodes/vertex/9/position = Vector2(-860, -360)
+nodes/vertex/10/node = SubResource("VisualShaderNodeInput_jq4e2")
+nodes/vertex/10/position = Vector2(-840, -160)
+nodes/vertex/connections = PackedInt32Array(3, 0, 2, 1, 4, 0, 2, 0, 5, 0, 4, 1, 7, 0, 6, 2, 2, 0, 0, 0, 6, 0, 4, 0, 8, 0, 6, 0, 9, 0, 8, 1, 10, 0, 8, 2)
+nodes/fragment/0/position = Vector2(580, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_83q07")
+nodes/fragment/2/position = Vector2(200, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_4whl3")
+nodes/fragment/3/position = Vector2(-200, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeUVFunc_puanv")
+nodes/fragment/4/position = Vector2(-20, 40)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_1l5xy")
+nodes/fragment/5/position = Vector2(-240, 160)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec2Parameter_icete")
+nodes/fragment/6/position = Vector2(-280, -20)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_bg7eh")
+nodes/fragment/7/position = Vector2(180, 340)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_8uaxy")
+nodes/fragment/8/position = Vector2(400, 240)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 2, 4, 0, 2, 0, 5, 0, 4, 2, 6, 0, 4, 1, 2, 0, 0, 0, 2, 0, 8, 0, 8, 0, 0, 5, 7, 0, 8, 1)
+
+[sub_resource type="Gradient" id="Gradient_pj1qa"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_itww7"]
+noise_type = 3
+frequency = 0.0073
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yn31g"]
+seamless = true
+color_ramp = SubResource("Gradient_pj1qa")
+noise = SubResource("FastNoiseLite_itww7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bi78u"]
+render_priority = 0
+shader = SubResource("VisualShader_3a8hp")
+shader_parameter/WavePanning = Vector2(-0.05, -0.05)
+shader_parameter/Heightmap = SubResource("NoiseTexture2D_yn31g")
+shader_parameter/HeightMultiplier = Vector3(0, 0.3, 0)
+shader_parameter/TexturePan = Vector2(0, 0)
+shader_parameter/Texture = ExtResource("3_mwm40")
+shader_parameter/EmissionStrength = 10.0
+
+[sub_resource type="Animation" id="Animation_whnno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Symbol:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PoolLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:surface_material_override/0:shader_parameter/Heightmap:noise:frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0078]
+}
+
+[sub_resource type="Animation" id="Animation_op3pd"]
+resource_name = "agitated"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/Heightmap:noise:frequency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.078]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PoolLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mwm40"]
+resource_name = "calm"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Symbol:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PoolLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:surface_material_override/0:shader_parameter/Heightmap:noise:frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0078]
+}
+
+[sub_resource type="Animation" id="Animation_fb6wk"]
+resource_name = "symbol"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Symbol:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PoolLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_op3pd"]
+_data = {
+&"RESET": SubResource("Animation_whnno"),
+&"agitated": SubResource("Animation_op3pd"),
+&"calm": SubResource("Animation_mwm40"),
+&"symbol": SubResource("Animation_fb6wk")
+}
 
 [node name="DarkPool" type="Node3D"]
 
@@ -125,6 +483,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.797673, 0)
 mesh = SubResource("PlaneMesh_ue03e")
 surface_material_override/0 = SubResource("ShaderMaterial_4whl3")
 
+[node name="PoolLight" type="Node3D" parent="VoidFluid"]
+visible = false
+
+[node name="VisibleLight" type="MeshInstance3D" parent="VoidFluid/PoolLight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.49148, 0)
+mesh = SubResource("CylinderMesh_kepsw")
+surface_material_override/0 = SubResource("StandardMaterial3D_op3pd")
+
+[node name="Light" type="OmniLight3D" parent="VoidFluid/PoolLight"]
+light_energy = 20.0
+omni_range = 5.29058
+
+[node name="Symbol" type="MeshInstance3D" parent="VoidFluid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161889, 0)
+visible = false
+mesh = SubResource("PlaneMesh_ue03e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_bi78u")
+
+[node name="PoolStates" type="AnimationPlayer" parent="VoidFluid"]
+libraries = {
+&"": SubResource("AnimationLibrary_op3pd")
+}
+autoplay = "calm"
+
 [node name="Walls" type="Node3D" parent="."]
 
 [node name="Wall1" parent="Walls" instance=ExtResource("3_ue03e")]
@@ -132,9 +515,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 
 [node name="Wall2" parent="Walls" instance=ExtResource("3_ue03e")]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, -6)
-
-[node name="Wall3" parent="Walls" instance=ExtResource("3_ue03e")]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 6, 0, 0)
 
 [node name="Pillars" type="Node3D" parent="."]
 

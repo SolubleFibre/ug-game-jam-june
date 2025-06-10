@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://yysy482oswx2"]
+[gd_scene load_steps=16 format=3 uid="uid://yysy482oswx2"]
 
 [ext_resource type="Script" uid="uid://cgf6c8kvimtxj" path="res://Scripts/Player/player.gd" id="1_uvnfx"]
 
@@ -29,10 +29,12 @@ color_ramp = SubResource("Gradient_uvnfx")
 noise = SubResource("FastNoiseLite_a3d8c")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtuoh"]
+render_priority = 1
 shading_mode = 0
 albedo_texture = SubResource("NoiseTexture2D_xpcdj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvnfx"]
+render_priority = 1
 shading_mode = 0
 albedo_color = Color(0.694121, 0.694121, 0.69412, 1)
 
@@ -41,6 +43,50 @@ material = SubResource("StandardMaterial3D_uvnfx")
 top_radius = 0.2
 bottom_radius = 0.2
 height = 0.05
+
+[sub_resource type="Animation" id="Animation_a3d8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.956914, -0.333654)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/SpotLight3D/LightArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xpcdj"]
+resource_name = "bob"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/SpotLight3D/LightArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.15, -0.05, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_uvnfx"]
 resource_name = "view_bob"
@@ -59,24 +105,10 @@ tracks/0/keys = {
 "values": [Vector3(0, 0.956914, -0.333654), Vector3(0, 0.8, -0.334), Vector3(0, 0.956914, -0.333654)]
 }
 
-[sub_resource type="Animation" id="Animation_a3d8c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.956914, -0.333654)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xpcdj"]
 _data = {
 &"RESET": SubResource("Animation_a3d8c"),
+&"bob": SubResource("Animation_xpcdj"),
 &"view_bob": SubResource("Animation_uvnfx")
 }
 
@@ -108,18 +140,24 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 shape = SubResource("CylinderShape3D_uvnfx")
 debug_color = Color(1, 1, 1, 0.0313726)
 
-[node name="Flashlight" type="MeshInstance3D" parent="Camera/SpotLight3D"]
+[node name="Flashlight" type="MeshInstance3D" parent="Camera/SpotLight3D/LightArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.391347)
 mesh = SubResource("CylinderMesh_uvnfx")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_mtuoh")
 
-[node name="FlashlightRim" type="MeshInstance3D" parent="Camera/SpotLight3D/Flashlight"]
+[node name="FlashlightRim" type="MeshInstance3D" parent="Camera/SpotLight3D/LightArea/Flashlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13, 0)
 mesh = SubResource("CylinderMesh_a3d8c")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
 [node name="CameraAnims" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_xpcdj")
 }
 speed_scale = 2.0
+
+[node name="FlashlightAnims" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xpcdj")
+}

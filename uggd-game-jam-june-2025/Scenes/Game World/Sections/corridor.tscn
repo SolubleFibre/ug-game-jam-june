@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://bh8h28nsxx0tx"]
+
+[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="1_nll8a"]
+[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="2_nll8a"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_1uj41"]
+
+[sub_resource type="Gradient" id="Gradient_qorgb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xwshf"]
+noise_type = 2
+frequency = 0.001
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cv0hp"]
+as_normal_map = true
+bump_strength = 20.0
+color_ramp = SubResource("Gradient_qorgb")
+noise = SubResource("FastNoiseLite_xwshf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uj41"]
+albedo_texture = ExtResource("1_nll8a")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = SubResource("NoiseTexture2D_cv0hp")
+uv1_scale = Vector3(12, 4, 4)
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oj1ra"]
+material = SubResource("StandardMaterial3D_1uj41")
+size = Vector2(12, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyebl"]
+size = Vector3(12, 0, 4)
+
+[node name="LargeHall" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_oj1ra")
+
+[node name="Collision" type="StaticBody3D" parent="Floor"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Floor/Collision"]
+shape = SubResource("BoxShape3D_jyebl")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 8, 0)
+mesh = SubResource("PlaneMesh_oj1ra")
+
+[node name="Pillars" type="Node3D" parent="."]
+visible = false
+
+[node name="Pillar1" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar2" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar3" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, 4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar5" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar6" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Pillar7" parent="Pillars" instance=ExtResource("2_nll8a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, -4.25)
+skeleton = NodePath("../..")
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Wall1" parent="Walls" instance=ExtResource("3_1uj41")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25, 2)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("3_1uj41")]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 0.25, -2)

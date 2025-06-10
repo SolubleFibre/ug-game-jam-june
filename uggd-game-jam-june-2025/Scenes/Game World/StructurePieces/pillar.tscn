@@ -6,12 +6,11 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k1jwe"]
 noise_type = 2
-frequency = 0.0004
+frequency = 0.0013
 cellular_return_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ais6i"]
 as_normal_map = true
-bump_strength = 20.0
 color_ramp = SubResource("Gradient_slgdm")
 noise = SubResource("FastNoiseLite_k1jwe")
 
@@ -31,6 +30,7 @@ radial_segments = 8
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_slgdm"]
 height = 8.0
+radius = 1.0
 
 [node name="Pillar" type="MeshInstance3D"]
 mesh = SubResource("CylinderMesh_ais6i")

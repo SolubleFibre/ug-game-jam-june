@@ -29,7 +29,6 @@ sky = SubResource("Sky_a20rb")
 tonemap_mode = 3
 tonemap_white = 6.0
 glow_enabled = true
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.3
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_emission = Color(0.113665, 0.113665, 0.113665, 1)
@@ -61,19 +60,19 @@ environment = SubResource("Environment_ltegh")
 [node name="RandomDoors" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
 
 [node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 50)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 0, 39)
 
 [node name="RandomlyClosingDoor2" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, 0)
 
 [node name="RandomlyClosingDoor3" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, 0)
-
-[node name="RandomlyClosingDoor4" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 18)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18, 0, 67)
 
 [node name="RandomlyClosingDoor5" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 45, 0, 39)
+
+[node name="RandomlyClosingDoor6" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0, 107)
 
 [node name="EntryCorridors" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
 
@@ -185,7 +184,25 @@ state = 1
 
 [node name="Intersection3" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 35, 0, -28)
+state = 1
+
+[node name="Intersection6" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 35, 0, -56)
 state = 4
+
+[node name="Intersection7" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(3.11932e-07, 0, -1, 0, 1, 0, 1, 0, 3.11932e-07, 63, 0, -56)
+state = 2
+
+[node name="SouljaDogRoom" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection7" instance=ExtResource("5_adfbo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.62939e-06, 0, -20)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection7/SouljaDogRoom" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 0)
+
+[node name="Wall" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection7/SouljaDogRoom" instance=ExtResource("6_6qnri")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -6, 0, -7.62939e-06)
+enable_corner_pillars = true
 
 [node name="Intersection5" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, -28)

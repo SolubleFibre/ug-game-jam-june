@@ -40,13 +40,14 @@ mesh = SubResource("PlaneMesh_xwshf")
 skeleton = NodePath("../..")
 
 [node name="Pillars" type="Node3D" parent="Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="Pillar1" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, 4.25)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 6.75, 4, 4.25)
 skeleton = NodePath("../../..")
 
 [node name="Pillar2" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, 4.25)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 2, 4, 4.25)
 skeleton = NodePath("../../..")
 
 [node name="Pillar3" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]
@@ -54,11 +55,11 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.75, 4, 
 skeleton = NodePath("../../..")
 
 [node name="Pillar5" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 5.25, 4, -4.25)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 6.75, 4, -4.25)
 skeleton = NodePath("../../..")
 
 [node name="Pillar6" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.75, 4, -4.25)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 2, 4, -4.25)
 skeleton = NodePath("../../..")
 
 [node name="Pillar7" parent="Structure/Pillars" instance=ExtResource("2_fnqxb")]

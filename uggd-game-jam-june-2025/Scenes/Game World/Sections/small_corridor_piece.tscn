@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bh8h28nsxx0tx"]
+[gd_scene load_steps=11 format=3 uid="uid://ctt12g7mgaj04"]
 
-[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="1_nll8a"]
-[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_1uj41"]
-[ext_resource type="PackedScene" uid="uid://b3xn7bttigabe" path="res://Scenes/Systems/section_loader.tscn" id="3_jyebl"]
+[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="1_wwl8r"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="2_c3kkp"]
+[ext_resource type="PackedScene" uid="uid://b3xn7bttigabe" path="res://Scenes/Systems/section_loader.tscn" id="3_fa6i6"]
 
 [sub_resource type="Gradient" id="Gradient_qorgb"]
 
@@ -17,25 +17,25 @@ bump_strength = 20.0
 color_ramp = SubResource("Gradient_qorgb")
 noise = SubResource("FastNoiseLite_xwshf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uj41"]
-albedo_texture = ExtResource("1_nll8a")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwl8r"]
+albedo_texture = ExtResource("1_wwl8r")
 normal_enabled = true
 normal_scale = 4.0
 normal_texture = SubResource("NoiseTexture2D_cv0hp")
-uv1_scale = Vector3(12, 4, 4)
+uv1_scale = Vector3(1, 4, 4)
 texture_filter = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oj1ra"]
-material = SubResource("StandardMaterial3D_1uj41")
-size = Vector2(12, 4)
+material = SubResource("StandardMaterial3D_wwl8r")
+size = Vector2(1, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jyebl"]
-size = Vector3(12, 0, 4)
+size = Vector3(1, 0, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nll8a"]
 size = Vector3(48, 8, 10)
 
-[node name="Corridor" type="Node3D"]
+[node name="SmallCorridor" type="Node3D"]
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -57,13 +57,13 @@ skeleton = NodePath("../..")
 
 [node name="Walls" type="Node3D" parent="Structure"]
 
-[node name="Wall1" parent="Structure/Walls" instance=ExtResource("3_1uj41")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25, 2)
+[node name="Wall1" parent="Structure/Walls" instance=ExtResource("2_c3kkp")]
+transform = Transform3D(0.084, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25, 2)
 
-[node name="Wall2" parent="Structure/Walls" instance=ExtResource("3_1uj41")]
-transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 0.25, -2)
+[node name="Wall2" parent="Structure/Walls" instance=ExtResource("2_c3kkp")]
+transform = Transform3D(-0.084, -1.50996e-07, -6.60024e-15, 0, -4.37114e-08, 1, -1.26836e-08, 1, 4.37114e-08, 0, 0.25, -2)
 
-[node name="SectionLoader" parent="." node_paths=PackedStringArray("disabled_node") instance=ExtResource("3_jyebl")]
+[node name="SectionLoader" parent="." node_paths=PackedStringArray("disabled_node") instance=ExtResource("3_fa6i6")]
 disabled_node = NodePath("../Structure")
 
 [node name="Hitbox" type="CollisionShape3D" parent="SectionLoader"]

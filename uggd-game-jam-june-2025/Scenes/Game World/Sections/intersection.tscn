@@ -36,49 +36,53 @@ size = Vector3(4, 0, 4)
 [node name="Intersection" type="Node3D"]
 script = ExtResource("1_4xo43")
 
-[node name="AdjacentCorridors" type="Node3D" parent="."]
+[node name="Structure" type="Node3D" parent="."]
 
-[node name="Corridor1" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+[node name="AdjacentCorridors" type="Node3D" parent="Structure"]
+
+[node name="Corridor1" parent="Structure/AdjacentCorridors" instance=ExtResource("1_rmvt5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
-[node name="Corridor2" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+[node name="Corridor2" parent="Structure/AdjacentCorridors" instance=ExtResource("1_rmvt5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
-[node name="Corridor3" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+[node name="Corridor3" parent="Structure/AdjacentCorridors" instance=ExtResource("1_rmvt5")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 8)
 
-[node name="Corridor4" parent="AdjacentCorridors" instance=ExtResource("1_rmvt5")]
+[node name="Corridor4" parent="Structure/AdjacentCorridors" instance=ExtResource("1_rmvt5")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -8)
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="Structure"]
 mesh = SubResource("PlaneMesh_lsamj")
+skeleton = NodePath("../..")
 
-[node name="Collision" type="StaticBody3D" parent="Floor"]
+[node name="Collision" type="StaticBody3D" parent="Structure/Floor"]
 
-[node name="Hitbox" type="CollisionShape3D" parent="Floor/Collision"]
+[node name="Hitbox" type="CollisionShape3D" parent="Structure/Floor/Collision"]
 shape = SubResource("BoxShape3D_ng6bi")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
 
-[node name="Roof" type="MeshInstance3D" parent="."]
+[node name="Roof" type="MeshInstance3D" parent="Structure"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 8, 0)
 mesh = SubResource("PlaneMesh_lsamj")
+skeleton = NodePath("../..")
 
-[node name="CorridorEnds" type="Node3D" parent="."]
+[node name="CorridorEnds" type="Node3D" parent="Structure"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 0, 0)
 
-[node name="Wall1" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
-transform = Transform3D(0.5, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 300, 2)
+[node name="Wall1" parent="Structure/CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(0.5, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 300, -8.5)
 skeleton = NodePath("")
 
-[node name="Wall2" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
-transform = Transform3D(-0.5, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 1.18021e-06, 300, -25)
+[node name="Wall2" parent="Structure/CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-0.5, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 0, 300, -13.5)
 skeleton = NodePath("")
 
-[node name="Wall3" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
-transform = Transform3D(-2.18557e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.5, 4.37114e-08, 1.91069e-15, 13.5, 300, -11.5)
+[node name="Wall3" parent="Structure/CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-2.18557e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.5, 4.37114e-08, 1.91069e-15, 2.5, 300, -11.5)
 skeleton = NodePath("")
 
-[node name="Wall4" parent="CorridorEnds" instance=ExtResource("3_cbhw5")]
-transform = Transform3D(-2.18557e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0.5, 4.37114e-08, 1.91069e-15, -13.5, 300, -11.5)
+[node name="Wall4" parent="Structure/CorridorEnds" instance=ExtResource("3_cbhw5")]
+transform = Transform3D(-2.18557e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0.5, 4.37114e-08, 1.91069e-15, -2.5, 300, -11.5)
 skeleton = NodePath("")

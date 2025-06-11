@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=55 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
 [ext_resource type="Shader" uid="uid://chrlj6r1ag25c" path="res://Misc/Shaders/pool_fluid.tres" id="2_vqj53"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_ue03e"]
 [ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="4_kepsw"]
 [ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="5_whnno"]
+[ext_resource type="PackedScene" uid="uid://b3xn7bttigabe" path="res://Scenes/Systems/section_loader.tscn" id="7_op3pd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqto"]
 resource_name = "material_0"
@@ -462,81 +463,96 @@ texture_filter = 2
 material = SubResource("StandardMaterial3D_cv0hp")
 size = Vector2(3, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fb6wk"]
+size = Vector3(48, 8, 10)
+
 [node name="DarkPool" type="Node3D"]
 
-[node name="PoolFloor" type="MeshInstance3D" parent="."]
+[node name="Structure" type="Node3D" parent="."]
+
+[node name="PoolFloor" type="MeshInstance3D" parent="Structure"]
 mesh = SubResource("ArrayMesh_qlfge")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_8w4o6")
 
-[node name="Collision" type="StaticBody3D" parent="PoolFloor"]
+[node name="Collision" type="StaticBody3D" parent="Structure/PoolFloor"]
 
-[node name="Hitbox" type="CollisionShape3D" parent="PoolFloor/Collision"]
+[node name="Hitbox" type="CollisionShape3D" parent="Structure/PoolFloor/Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_kepsw")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
 
-[node name="PoolBarrier" type="CollisionShape3D" parent="PoolFloor/Collision"]
+[node name="PoolBarrier" type="CollisionShape3D" parent="Structure/PoolFloor/Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71453, 0)
 shape = SubResource("CylinderShape3D_mwm40")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
 
-[node name="Roof" type="MeshInstance3D" parent="."]
+[node name="Roof" type="MeshInstance3D" parent="Structure"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 7.92122, 0)
 mesh = SubResource("PlaneMesh_mwm40")
+skeleton = NodePath("../..")
 
-[node name="VoidFluid" type="MeshInstance3D" parent="."]
+[node name="VoidFluid" type="MeshInstance3D" parent="Structure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.797673, 0)
 mesh = SubResource("PlaneMesh_ue03e")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4whl3")
 
-[node name="PoolLight" type="Node3D" parent="VoidFluid"]
+[node name="PoolLight" type="Node3D" parent="Structure/VoidFluid"]
 visible = false
 
-[node name="VisibleLight" type="MeshInstance3D" parent="VoidFluid/PoolLight"]
+[node name="VisibleLight" type="MeshInstance3D" parent="Structure/VoidFluid/PoolLight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.49148, 0)
 mesh = SubResource("CylinderMesh_kepsw")
 surface_material_override/0 = SubResource("StandardMaterial3D_op3pd")
 
-[node name="Light" type="OmniLight3D" parent="VoidFluid/PoolLight"]
+[node name="Light" type="OmniLight3D" parent="Structure/VoidFluid/PoolLight"]
 light_energy = 20.0
 omni_range = 5.29058
 
-[node name="Symbol" type="MeshInstance3D" parent="VoidFluid"]
+[node name="Symbol" type="MeshInstance3D" parent="Structure/VoidFluid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161889, 0)
 visible = false
 mesh = SubResource("PlaneMesh_ue03e")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_bi78u")
 
-[node name="PoolStates" type="AnimationPlayer" parent="VoidFluid"]
+[node name="PoolStates" type="AnimationPlayer" parent="Structure/VoidFluid"]
 libraries = {
 &"": SubResource("AnimationLibrary_op3pd")
 }
 autoplay = "calm"
 
-[node name="Walls" type="Node3D" parent="."]
+[node name="Walls" type="Node3D" parent="Structure"]
 
-[node name="Wall1" parent="Walls" instance=ExtResource("3_ue03e")]
+[node name="Wall1" parent="Structure/Walls" instance=ExtResource("3_ue03e")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 6)
 mesh = SubResource("PlaneMesh_a20rb")
 
-[node name="Wall2" parent="Walls" instance=ExtResource("3_ue03e")]
+[node name="Wall2" parent="Structure/Walls" instance=ExtResource("3_ue03e")]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, -6)
 mesh = SubResource("PlaneMesh_a20rb")
 
-[node name="Pillars" type="Node3D" parent="."]
+[node name="Pillars" type="Node3D" parent="Structure"]
 
-[node name="Pillar" parent="Pillars" instance=ExtResource("4_kepsw")]
+[node name="Pillar" parent="Structure/Pillars" instance=ExtResource("4_kepsw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 5)
 
-[node name="Pillar2" parent="Pillars" instance=ExtResource("4_kepsw")]
+[node name="Pillar2" parent="Structure/Pillars" instance=ExtResource("4_kepsw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, -5)
 
-[node name="Pillar3" parent="Pillars" instance=ExtResource("4_kepsw")]
+[node name="Pillar3" parent="Structure/Pillars" instance=ExtResource("4_kepsw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 5)
 
-[node name="Pillar4" parent="Pillars" instance=ExtResource("4_kepsw")]
+[node name="Pillar4" parent="Structure/Pillars" instance=ExtResource("4_kepsw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, -5)
+
+[node name="SectionLoader" parent="." node_paths=PackedStringArray("disabled_node") instance=ExtResource("7_op3pd")]
+disabled_node = NodePath("../Structure")
+
+[node name="Hitbox" type="CollisionShape3D" parent="SectionLoader"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("BoxShape3D_fb6wk")
+debug_fill = false

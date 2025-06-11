@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://yysy482oswx2"]
+[gd_scene load_steps=17 format=3 uid="uid://yysy482oswx2"]
 
 [ext_resource type="Script" uid="uid://cgf6c8kvimtxj" path="res://Scripts/Player/player.gd" id="1_uvnfx"]
 
@@ -113,6 +113,9 @@ _data = {
 &"view_bob": SubResource("Animation_uvnfx")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uvnfx"]
+size = Vector3(12, 12, 32)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_uvnfx")
 
@@ -165,3 +168,11 @@ speed_scale = 2.0
 libraries = {
 &"": SubResource("AnimationLibrary_xpcdj")
 }
+
+[node name="Loader" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Hitbox" type="CollisionShape3D" parent="Loader"]
+shape = SubResource("BoxShape3D_uvnfx")
+debug_color = Color(0, 0.6, 0.701961, 0)

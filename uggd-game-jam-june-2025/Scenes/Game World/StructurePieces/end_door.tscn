@@ -1,16 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://b2vx1vbwh4lbd"]
+[gd_scene load_steps=18 format=3 uid="uid://cpvdtn7iwn4e0"]
 
-[ext_resource type="Script" uid="uid://d4g62qlys0v5b" path="res://Scripts/StructurePieces/randomly_closing_door.gd" id="1_5q3e3"]
-[ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="2_8fmw0"]
-[ext_resource type="Material" uid="uid://c3y3lp365scf1" path="res://Assets/Materials/wall.tres" id="2_xh528"]
-[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="4_5q3e3"]
+[ext_resource type="Script" uid="uid://d4g62qlys0v5b" path="res://Scripts/StructurePieces/randomly_closing_door.gd" id="1_74kqm"]
+[ext_resource type="Material" uid="uid://c3y3lp365scf1" path="res://Assets/Materials/wall.tres" id="2_t3q32"]
+[ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="3_ymuww"]
+[ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="4_q0xo3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jdsbv"]
-material = ExtResource("2_xh528")
+material = ExtResource("2_t3q32")
 size = Vector3(2.5, 8, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv0hp"]
-albedo_texture = ExtResource("2_8fmw0")
+albedo_texture = ExtResource("3_ymuww")
 texture_filter = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a20rb"]
@@ -33,16 +33,28 @@ bump_strength = 20.0
 color_ramp = SubResource("Gradient_qorgb")
 noise = SubResource("FastNoiseLite_xwshf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_er00x"]
-albedo_texture = ExtResource("4_5q3e3")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74kqm"]
+albedo_color = Color(1, 0.666667, 0, 1)
+albedo_texture = ExtResource("4_q0xo3")
 normal_enabled = true
 normal_scale = 4.0
 normal_texture = SubResource("NoiseTexture2D_cv0hp")
+clearcoat_enabled = true
 uv1_scale = Vector3(1, 2, 2)
 texture_filter = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xh528"]
 size = Vector3(2.5, 8, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3q32"]
+albedo_color = Color(1, 0.666667, 0, 1)
+albedo_texture = ExtResource("4_q0xo3")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = SubResource("NoiseTexture2D_cv0hp")
+clearcoat_enabled = true
+uv1_scale = Vector3(1, 2, 2)
+texture_filter = 2
 
 [sub_resource type="Animation" id="Animation_xg3lk"]
 length = 0.001
@@ -83,7 +95,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.9, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(2, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -95,7 +107,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.9, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-2, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_er00x"]
@@ -105,7 +117,8 @@ _data = {
 }
 
 [node name="RandomlyClosingDoor" type="Node3D"]
-script = ExtResource("1_5q3e3")
+script = ExtResource("1_74kqm")
+keep_close = true
 
 [node name="DoorHalves" type="Node3D" parent="."]
 
@@ -161,7 +174,7 @@ skeleton = NodePath("../../../../..")
 [node name="HalfSeal" type="MeshInstance3D" parent="DoorHalves/Door1"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.24, 4, 0)
 mesh = SubResource("BoxMesh_xg3lk")
-surface_material_override/0 = SubResource("StandardMaterial3D_er00x")
+surface_material_override/0 = SubResource("StandardMaterial3D_74kqm")
 
 [node name="Collision" type="StaticBody3D" parent="DoorHalves/Door1"]
 
@@ -224,7 +237,7 @@ skeleton = NodePath("../../../../..")
 [node name="HalfSeal" type="MeshInstance3D" parent="DoorHalves/Door2"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.24, 4, 0)
 mesh = SubResource("BoxMesh_xg3lk")
-surface_material_override/0 = SubResource("StandardMaterial3D_er00x")
+surface_material_override/0 = SubResource("StandardMaterial3D_t3q32")
 
 [node name="Collision" type="StaticBody3D" parent="DoorHalves/Door2"]
 

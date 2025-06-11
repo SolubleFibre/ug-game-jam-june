@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const SPEED = 3.5
+@export var SPEED = 5
 const JUMP_VELOCITY = 4.5
 
 func _ready():

@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5k3mj7fjvpqn"]
+[gd_scene load_steps=15 format=3 uid="uid://c5k3mj7fjvpqn"]
 
 [ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="1_h2n5j"]
+[ext_resource type="Script" uid="uid://b806oa16a0cls" path="res://Scripts/StructurePieces/wall.gd" id="2_1idbx"]
 [ext_resource type="Material" uid="uid://c3y3lp365scf1" path="res://Assets/Materials/wall.tres" id="2_xxt6f"]
+[ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="4_7cowg"]
+[ext_resource type="Texture2D" uid="uid://bld3tpmifurmg" path="res://Assets/2D/PillarTexture.png" id="5_0qhrb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv0hp"]
 albedo_texture = ExtResource("1_h2n5j")
@@ -18,9 +21,34 @@ size = Vector2(12, 8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8aw5b"]
 size = Vector3(12, 0.0980835, 7.95026)
 
+[sub_resource type="Gradient" id="Gradient_slgdm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k1jwe"]
+noise_type = 2
+frequency = 0.0013
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nb4pt"]
+as_normal_map = true
+color_ramp = SubResource("Gradient_slgdm")
+noise = SubResource("FastNoiseLite_k1jwe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1jwe"]
+albedo_texture = ExtResource("5_0qhrb")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_nb4pt")
+uv1_scale = Vector3(6, 6, 6)
+texture_filter = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_laqne"]
+material = SubResource("StandardMaterial3D_k1jwe")
+height = 8.0
+radial_segments = 8
+
 [node name="Wall" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("PlaneMesh_a20rb")
+script = ExtResource("2_1idbx")
 
 [node name="LowerIncline" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.18, 0.403)
@@ -48,3 +76,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0759583, 3.72617)
 shape = SubResource("BoxShape3D_8aw5b")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
+
+[node name="Pillars" type="Node3D" parent="."]
+
+[node name="Pillar4" parent="Pillars" instance=ExtResource("4_7cowg")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6, -1.74846e-07, 4)
+mesh = SubResource("CylinderMesh_laqne")
+skeleton = NodePath("../..")
+
+[node name="Pillar5" parent="Pillars" instance=ExtResource("4_7cowg")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6, 0, 4)
+mesh = SubResource("CylinderMesh_laqne")
+skeleton = NodePath("../..")

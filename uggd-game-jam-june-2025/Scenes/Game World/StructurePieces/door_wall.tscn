@@ -179,6 +179,14 @@ debug_fill = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 0)
 mesh = SubResource("CylinderMesh_8oi30")
 
+[node name="Pillar3" parent="Pillars" instance=ExtResource("2_mnoks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 0)
+mesh = SubResource("CylinderMesh_8oi30")
+
+[node name="Pillar4" parent="Pillars" instance=ExtResource("2_mnoks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, 0)
+mesh = SubResource("CylinderMesh_8oi30")
+
 [node name="Pillar2" parent="Pillars" instance=ExtResource("2_mnoks")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 0)
 mesh = SubResource("CylinderMesh_8oi30")

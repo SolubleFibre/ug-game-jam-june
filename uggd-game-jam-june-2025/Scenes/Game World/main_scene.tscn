@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwrngc1od1182"]
+[gd_scene load_steps=16 format=3 uid="uid://dwrngc1od1182"]
 
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="2_bqo8f"]
+[ext_resource type="PackedScene" uid="uid://bjgc4h8mmv85w" path="res://Scenes/Game World/StructurePieces/beginning_door.tscn" id="2_d3v21"]
 [ext_resource type="PackedScene" uid="uid://bh8h28nsxx0tx" path="res://Scenes/Game World/Sections/corridor.tscn" id="2_dbc8c"]
 [ext_resource type="PackedScene" uid="uid://yysy482oswx2" path="res://Scenes/Player/player.tscn" id="2_jk7sn"]
 [ext_resource type="PackedScene" uid="uid://dmslrd2kpvp8u" path="res://Scenes/Game World/StructurePieces/door_wall.tscn" id="3_jk7sn"]
-[ext_resource type="PackedScene" uid="uid://rbmyhb3m8gk2" path="res://Scenes/Game World/StructurePieces/intersection.tscn" id="4_bqo8f"]
+[ext_resource type="PackedScene" uid="uid://rbmyhb3m8gk2" path="res://Scenes/Game World/Sections/intersection.tscn" id="4_bqo8f"]
+[ext_resource type="PackedScene" uid="uid://bk0yfoujgaeps" path="res://Scenes/Game World/Sections/large_hall.tscn" id="5_adfbo"]
+[ext_resource type="PackedScene" uid="uid://ctt12g7mgaj04" path="res://Scenes/Game World/Sections/small_corridor_piece.tscn" id="5_nt506"]
 [ext_resource type="PackedScene" uid="uid://b2vx1vbwh4lbd" path="res://Scenes/Game World/StructurePieces/randomly_closing_door.tscn" id="5_vkf2p"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="6_6qnri"]
+[ext_resource type="PackedScene" uid="uid://b4rl513h7fuj0" path="res://Scenes/Game World/StructurePieces/monster_door.tscn" id="6_d3v21"]
+[ext_resource type="PackedScene" uid="uid://cpvdtn7iwn4e0" path="res://Scenes/Game World/StructurePieces/end_door.tscn" id="11_dpgss"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -32,6 +38,10 @@ adjustment_enabled = true
 
 [node name="MainScene" type="Node3D"]
 
+[node name="EditorLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.2773, 0)
+editor_only = true
+
 [node name="Pixelizer" type="SubViewportContainer" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -46,28 +56,213 @@ render_target_update_mode = 4
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Pixelizer/SubViewport"]
 environment = SubResource("Environment_ltegh")
 
-[node name="MainHall" type="Node3D" parent="Pixelizer/SubViewport"]
+[node name="MazeRegions" type="Node3D" parent="Pixelizer/SubViewport"]
 
-[node name="DarkPool" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("2_bqo8f")]
+[node name="RandomDoors" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
 
-[node name="Corridor1" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("2_dbc8c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 50)
 
-[node name="DooredWall" parent="Pixelizer/SubViewport/MainHall/Corridor1" instance=ExtResource("3_jk7sn")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+[node name="RandomlyClosingDoor2" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, 0)
 
-[node name="Corridor2" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("2_dbc8c")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, 0)
+[node name="RandomlyClosingDoor3" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, 0)
 
-[node name="DooredWall" parent="Pixelizer/SubViewport/MainHall/Corridor2" instance=ExtResource("3_jk7sn")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+[node name="RandomlyClosingDoor4" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 18)
 
-[node name="Intersection1" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("4_bqo8f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+[node name="RandomlyClosingDoor5" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 45, 0, 39)
+
+[node name="EntryCorridors" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
+
+[node name="LargeHall" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -32, 0, 20)
+
+[node name="LargeHall2" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -52, 0, 39)
+
+[node name="BeginningDoor" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/LargeHall2" instance=ExtResource("2_d3v21")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
+
+[node name="Intersection" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 39)
+
+[node name="Intersection3" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -32, 0, 67)
+state = 4
+
+[node name="Intersection2" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 39)
 state = 1
 
-[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MainHall" instance=ExtResource("5_vkf2p")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 0, 0)
+[node name="SmallCorridor" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 0)
+
+[node name="SmallCorridor2" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 0)
+
+[node name="SmallCorridor3" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 0)
+
+[node name="SmallCorridor4" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 0)
+
+[node name="SmallCorridor5" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 0)
+
+[node name="SmallCorridor6" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 0)
+
+[node name="SmallCorridor7" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 0)
+
+[node name="SmallCorridor8" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/Intersection2" instance=ExtResource("5_nt506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 0)
+
+[node name="MonsterHall" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors" instance=ExtResource("5_adfbo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, 19)
+
+[node name="Wall" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/MonsterHall" instance=ExtResource("6_6qnri")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -6, 0, 2.38419e-07)
+enable_corner_pillars = true
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/MonsterHall" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -4.76837e-07)
+
+[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MazeRegions/EntryCorridors/MonsterHall" instance=ExtResource("6_d3v21")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -9.53674e-07)
+
+[node name="PoolHall" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
+
+[node name="DarkPool" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("2_bqo8f")]
+
+[node name="Corridor1" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/PoolHall/Corridor1" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="Corridor2" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, 0)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/PoolHall/Corridor2" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="Intersection1" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32, 0, 0)
+state = 1
+
+[node name="Intersection2" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -32, 0, 0)
+state = 4
+
+[node name="Rooms" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32, 0, 32)
+
+[node name="TaskRoom1" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("5_adfbo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -32, 0, -48)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/Rooms/TaskRoom1" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="Wall" parent="Pixelizer/SubViewport/MazeRegions/Rooms/TaskRoom1" instance=ExtResource("6_6qnri")]
+transform = Transform3D(1.31134e-07, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, -1.31134e-07, -5.73206e-15, 6, 0, 0)
+skeleton = NodePath("")
+enable_corner_pillars = true
+
+[node name="LargeHall" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Intersection" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 36)
+state = 1
+
+[node name="Intersection2" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -32, 0, -28)
+state = 1
+
+[node name="Intersection3" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 35, 0, -28)
+state = 4
+
+[node name="Intersection5" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, -28)
+
+[node name="SmallCorridor" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -14.5)
+
+[node name="SmallCorridor2" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -15.5)
+
+[node name="SmallCorridor3" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -16.5)
+
+[node name="SmallCorridor4" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -17.5)
+
+[node name="SmallCorridor5" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -18.5)
+
+[node name="SmallCorridor6" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -19.5)
+
+[node name="SmallCorridor7" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -20.5)
+
+[node name="SmallCorridor8" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -21.5)
+
+[node name="SmallCorridor9" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -22.5)
+
+[node name="SmallCorridor10" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -23.5)
+
+[node name="SmallCorridor11" parent="Pixelizer/SubViewport/MazeRegions/Rooms/Intersection5" instance=ExtResource("5_nt506")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -24.5)
+
+[node name="Corridor" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35, 0, 16)
+
+[node name="Corridor2" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("2_dbc8c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35, 0, 3.99998)
+
+[node name="LargeHall2" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("5_adfbo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35, 0, -8.00001)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/Rooms/LargeHall2" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 1.52588e-05)
+
+[node name="DooredWall2" parent="Pixelizer/SubViewport/MazeRegions/Rooms/LargeHall2" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 1.52588e-05)
+
+[node name="Intersection4" parent="Pixelizer/SubViewport/MazeRegions/Rooms" instance=ExtResource("4_bqo8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+state = 1
+
+[node name="EndCorridor" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86, 0, 39)
+
+[node name="LargeHall" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor" instance=ExtResource("5_adfbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="LargeHall2" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor" instance=ExtResource("5_adfbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="DooredWall" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -6, 0, 0)
+
+[node name="DooredWall2" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("3_jk7sn")]
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, 18, 0, 0)
+
+[node name="BeginningDoor" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("2_d3v21")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18, 0, 0)
+
+[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("11_dpgss")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18, 0, 0)
 
 [node name="Player" parent="Pixelizer/SubViewport" instance=ExtResource("2_jk7sn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.86139, 1.29353, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8614, 1.29353, 40)
+SPEED = 6

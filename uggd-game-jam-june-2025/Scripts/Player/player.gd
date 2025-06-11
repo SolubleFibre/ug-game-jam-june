@@ -2,10 +2,19 @@ extends CharacterBody3D
 
 @export var SPEED = 5
 const JUMP_VELOCITY = 4.5
+var sprinting_speed : float = 1
 
 func _ready():
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 	$VisibleMesh.visible = false
+	
+func _unhandled_input(_event):
+	if Input.is_action_just_pressed("sprint"):
+		sprinting_speed = 1.5
+		$Camera/FovAnims.play("sprint")
+	elif Input.is_action_just_released("sprint"):
+		sprinting_speed = 1
+		$Camera/FovAnims.play_backwards("sprint")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -19,13 +28,13 @@ func _physics_process(delta):
 	if direction:
 		$CameraAnims.play("view_bob")
 		$FlashlightAnims.play("bob")
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED * sprinting_speed
+		velocity.z = direction.z * SPEED * sprinting_speed
 	else:
 		$CameraAnims.stop()
 		$FlashlightAnims.stop()
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED * sprinting_speed)
+		velocity.z = move_toward(velocity.z, 0, SPEED * sprinting_speed)
 
 	move_and_slide()
 

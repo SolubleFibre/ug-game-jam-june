@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://cpvdtn7iwn4e0"]
 
-[ext_resource type="Script" uid="uid://d4g62qlys0v5b" path="res://Scripts/StructurePieces/randomly_closing_door.gd" id="1_74kqm"]
+[ext_resource type="Script" uid="uid://cvwdssl26x7bc" path="res://Scripts/StructurePieces/end_door.gd" id="1_74kqm"]
 [ext_resource type="Material" uid="uid://c3y3lp365scf1" path="res://Assets/Materials/wall.tres" id="2_t3q32"]
 [ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="3_ymuww"]
 [ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="4_q0xo3"]
@@ -116,9 +116,8 @@ _data = {
 &"open": SubResource("Animation_5q3e3")
 }
 
-[node name="RandomlyClosingDoor" type="Node3D"]
+[node name="EndDoor" type="Node3D"]
 script = ExtResource("1_74kqm")
-keep_close = true
 
 [node name="DoorHalves" type="Node3D" parent="."]
 

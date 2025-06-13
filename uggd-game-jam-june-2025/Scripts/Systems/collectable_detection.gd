@@ -3,6 +3,7 @@ extends Area3D
 var collected = false
 
 func _on_body_entered(_body):
+	print("piece collected!")
 	if !collected:
 		PuzzleManager.collected += 1
 		collected = true

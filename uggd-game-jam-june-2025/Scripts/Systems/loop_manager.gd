@@ -5,7 +5,6 @@ extends Node3D
 
 func _ready():
 	loop_decider()
-	reset_puzzle_postions()
 
 func reset_puzzle_postions():
 	$Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection.position.y = 400

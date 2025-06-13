@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dq7qe05q0d18e"]
+[gd_scene load_steps=9 format=4 uid="uid://dq7qe05q0d18e"]
 
 [ext_resource type="PackedScene" uid="uid://gcphy2p5y4nv" path="res://Scenes/Systems/collectable_detection.tscn" id="1_o5dr3"]
 
@@ -30,6 +30,9 @@ albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o5dr3"]
+radius = 1.02685
 
 [sub_resource type="Animation" id="Animation_j2e0s"]
 resource_name = "spin"
@@ -76,6 +79,11 @@ _data = {
 mesh = SubResource("ArrayMesh_w1dee")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_j2e0s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectableDetection"]
+shape = SubResource("SphereShape3D_o5dr3")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
 
 [node name="Anims" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://dcwmc2gxtt872"]
+[gd_scene load_steps=2 format=3 uid="uid://dcwmc2gxtt872"]
 
-[node name="PipePuzzle" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://d2mpcmqtrb6ks" path="res://Scenes/Game World/PipePuzzles/end_pipe.tscn" id="1_57qu2"]
+
+[node name="Pipe Puzzle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="0, 0" parent="." instance=ExtResource("1_57qu2")]
+layout_mode = 1
+
+[node name="0, 1" parent="." instance=ExtResource("1_57qu2")]
+layout_mode = 1
+offset_left = 128.0
+offset_right = -1728.0
+pipe_orientation = 1

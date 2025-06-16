@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2mpcmqtrb6ks"]
 
-[ext_resource type="Script" uid="uid://dvdtstimhyxdk" path="res://Scripts/PipePuzzle/pipe_turn.gd" id="1_ebbcp"]
+[ext_resource type="Script" uid="uid://dmb87bx321532" path="res://Scripts/PipePuzzle/pipe_turn.gd" id="1_o5856"]
 [ext_resource type="Texture2D" uid="uid://c4a75chsj6fj4" path="res://Assets/2D/Pipe/end_pipe_0.png" id="2_45ssa"]
 [ext_resource type="Texture2D" uid="uid://r5opar03mipe" path="res://Assets/2D/Pipe/end_pipe_1.png" id="3_2s71f"]
 [ext_resource type="Texture2D" uid="uid://dqlon53s7l0y7" path="res://Assets/2D/Pipe/end_pipe_2.png" id="4_fe8h6"]
@@ -11,29 +11,36 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1816.0
-offset_bottom = -976.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -1792.0
+offset_bottom = -952.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_o5856")
+pipe_textures = Array[Texture2D]([ExtResource("2_45ssa"), ExtResource("3_2s71f"), ExtResource("4_fe8h6"), ExtResource("5_n44o3")])
+pipe_orientation = 3
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 72.0
-offset_bottom = 72.0
-script = ExtResource("1_ebbcp")
-rotated_sprites = Array[Texture2D]([ExtResource("2_45ssa"), ExtResource("3_2s71f"), ExtResource("4_fe8h6"), ExtResource("5_n44o3")])
-
-[node name="Button" type="Button" parent="TextureRect"]
+[node name="pipe_image" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -32.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_45ssa")
+
+[node name="Button" type="Button" parent="pipe_image"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.508
+anchor_top = 0.5
+anchor_right = 0.508
+anchor_bottom = 0.5
+offset_left = -32.512
+offset_top = -32.0
+offset_right = -19.512
+offset_bottom = -19.0
+grow_horizontal = 0
 scale = Vector2(5, 5)
 
-[connection signal="pressed" from="TextureRect/Button" to="TextureRect" method="_on_button_pressed"]
+[connection signal="pressed" from="pipe_image/Button" to="." method="_on_button_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c122jji1f75ps"
-path="res://.godot/imported/pipe0.png-86d341b03086a267ecae9cafe813d71e.ctex"
+uid="uid://d4h76dgm6nb6t"
+path="res://.godot/imported/corner_pipe_0.png-c2b8fa38bbe8678a9660127699ea41ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/2D/Pipe/pipe0.png"
-dest_files=["res://.godot/imported/pipe0.png-86d341b03086a267ecae9cafe813d71e.ctex"]
+source_file="res://Assets/2D/Pipe/corner_pipe_0.png"
+dest_files=["res://.godot/imported/corner_pipe_0.png-c2b8fa38bbe8678a9660127699ea41ff.ctex"]
 
 [params]
 

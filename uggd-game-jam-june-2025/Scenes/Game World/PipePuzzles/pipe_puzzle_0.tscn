@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfvfauq7443fd"]
 
-[ext_resource type="Script" uid="uid://bpxsu8arwxnss" path="res://Scripts/PipePuzzle/pipe_puzzle_1.gd" id="1_nrlgn"]
+[ext_resource type="Script" uid="uid://bpxsu8arwxnss" path="res://Scripts/PipePuzzle/pipe_puzzle_0.gd" id="1_nrlgn"]
 [ext_resource type="PackedScene" uid="uid://d2mpcmqtrb6ks" path="res://Scenes/Game World/PipePuzzles/end_pipe.tscn" id="2_kah4h"]
 [ext_resource type="PackedScene" uid="uid://ceyv3hc3ys43r" path="res://Scenes/Game World/PipePuzzles/corner_pipe.tscn" id="3_3gpl3"]
 [ext_resource type="PackedScene" uid="uid://b16v6scyjab5v" path="res://Scenes/Game World/PipePuzzles/straight_pipe.tscn" id="4_g1tva"]

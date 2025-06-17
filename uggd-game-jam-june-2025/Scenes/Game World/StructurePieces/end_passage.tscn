@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://15rnsbv4wtv8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vl0oj"]
+size = Vector3(1, 8, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2vw3n"]
+flip_faces = true
+size = Vector3(3, 8, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv26m"]
+shading_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2vw3n"]
+size = Vector3(3, 0.001, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gv26m"]
+size = Vector3(3, 0.001, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3kerg"]
+size = Vector3(4, 0.001, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gv26m"]
+
+[node name="EndPassage" type="Area3D"]
+collision_mask = 2
+
+[node name="DetectionHitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 0)
+shape = SubResource("BoxShape3D_vl0oj")
+
+[node name="Passage" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50897, 4, 0)
+mesh = SubResource("BoxMesh_2vw3n")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_gv26m")
+
+[node name="ActualLight" type="SpotLight3D" parent="."]
+transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, 3.09086e-08, 0.707107, 0.707107, 1, 0, -4.37114e-08, -0.127296, 5.73467, 0)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 11.3464
+
+[node name="Collision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50897, 4, 0)
+
+[node name="Floor" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+shape = SubResource("BoxShape3D_2vw3n")
+
+[node name="Wall1" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0, 2)
+shape = SubResource("BoxShape3D_gv26m")
+
+[node name="Wall2" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0, -2)
+shape = SubResource("BoxShape3D_gv26m")
+
+[node name="Wall3" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(-4.37114e-08, 1, -2.98023e-08, 0, 2.98023e-08, 1, 1, 4.37114e-08, -1.3027e-15, -1.5, 0, 0)
+shape = SubResource("BoxShape3D_3kerg")
+
+[node name="Backshower" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65108, 4.4273, 0)
+mesh = SubResource("BoxMesh_gv26m")
+skeleton = NodePath("")

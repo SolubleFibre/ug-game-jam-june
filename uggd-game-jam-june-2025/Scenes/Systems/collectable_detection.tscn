@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://gcphy2p5y4nv"]
+
+[ext_resource type="Script" uid="uid://cle6brckb5lcw" path="res://Scripts/Systems/collectable_detection.gd" id="1_85xgh"]
+
+[node name="CollectableDetection" type="Area3D"]
+collision_mask = 2
+script = ExtResource("1_85xgh")
+
+[node name="CollectSFX" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="CollectSFX" to="." method="_on_collect_sfx_finished"]

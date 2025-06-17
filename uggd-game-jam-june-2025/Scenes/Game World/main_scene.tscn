@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwrngc1od1182"]
+[gd_scene load_steps=22 format=3 uid="uid://dwrngc1od1182"]
 
+[ext_resource type="Script" uid="uid://dxvpal4gy1a5x" path="res://Scripts/Systems/loop_manager.gd" id="1_0mi7y"]
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="2_bqo8f"]
 [ext_resource type="PackedScene" uid="uid://bjgc4h8mmv85w" path="res://Scenes/Game World/StructurePieces/beginning_door.tscn" id="2_d3v21"]
 [ext_resource type="PackedScene" uid="uid://bh8h28nsxx0tx" path="res://Scenes/Game World/Sections/corridor.tscn" id="2_dbc8c"]
@@ -10,7 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://b2vx1vbwh4lbd" path="res://Scenes/Game World/StructurePieces/randomly_closing_door.tscn" id="5_vkf2p"]
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="6_6qnri"]
 [ext_resource type="PackedScene" uid="uid://b4rl513h7fuj0" path="res://Scenes/Game World/StructurePieces/monster_door.tscn" id="6_d3v21"]
+[ext_resource type="PackedScene" uid="uid://d1e6eua7kahw4" path="res://Scenes/Game World/Props/Interactable/puzzle_terminal.tscn" id="11_0mi7y"]
 [ext_resource type="PackedScene" uid="uid://cpvdtn7iwn4e0" path="res://Scenes/Game World/StructurePieces/end_door.tscn" id="11_dpgss"]
+[ext_resource type="PackedScene" uid="uid://15rnsbv4wtv8" path="res://Scenes/Game World/StructurePieces/end_passage.tscn" id="12_kfwqi"]
+[ext_resource type="PackedScene" uid="uid://dq7qe05q0d18e" path="res://Scenes/Game World/Props/Interactable/puzzle_piece.tscn" id="13_x0fxp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -35,7 +39,47 @@ volumetric_fog_emission = Color(0.113665, 0.113665, 0.113665, 1)
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
 
+[sub_resource type="Animation" id="Animation_kfwqi"]
+resource_name = "restart_loop"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 2.5),
+"transitions": PackedFloat32Array(-2, 1, 0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a733g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a733g"]
+_data = {
+&"RESET": SubResource("Animation_a733g"),
+&"restart_loop": SubResource("Animation_kfwqi")
+}
+
 [node name="MainScene" type="Node3D"]
+script = ExtResource("1_0mi7y")
+current_loop = 0
 
 [node name="EditorLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.2773, 0)
@@ -70,9 +114,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18, 0,
 
 [node name="RandomlyClosingDoor5" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 45, 0, 39)
+keep_open = true
 
 [node name="RandomlyClosingDoor6" parent="Pixelizer/SubViewport/MazeRegions/RandomDoors" instance=ExtResource("5_vkf2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0, 107)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0, 108)
+keep_open = true
 
 [node name="EntryCorridors" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
 
@@ -222,12 +268,42 @@ transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -6, 0, 0
 [node name="DooredWall2" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("3_jk7sn")]
 transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, 18, 0, 0)
 
-[node name="BeginningDoor" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("2_d3v21")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.1199, 0, 0)
-
-[node name="RandomlyClosingDoor" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("11_dpgss")]
+[node name="EndDoor" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("11_dpgss")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18, 0, 0)
+
+[node name="EndPassage" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2" instance=ExtResource("12_kfwqi")]
+transform = Transform3D(-1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, 18, 0, 0)
+
+[node name="PuzzleTerminal" parent="Pixelizer/SubViewport/MazeRegions/EndCorridor" instance=ExtResource("11_0mi7y")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 10, 1, 3)
+
+[node name="Puzzles" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
+
+[node name="JigsawCollection" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions/Puzzles"]
+
+[node name="PuzzlePiece" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection" instance=ExtResource("13_x0fxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2641, 0.893637, 72.1663)
+
+[node name="PuzzlePiece2" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection" instance=ExtResource("13_x0fxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90289, 0.893637, -3.75796)
+
+[node name="PuzzlePiece3" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection" instance=ExtResource("13_x0fxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.166, 0.893637, 0.146971)
 
 [node name="Player" parent="Pixelizer/SubViewport" instance=ExtResource("2_jk7sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8614, 1.29353, 40)
 SPEED = 6
+
+[node name="Screenfader" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ScreenAnims" type="AnimationPlayer" parent="Screenfader"]
+libraries = {
+&"": SubResource("AnimationLibrary_a733g")
+}
+
+[connection signal="body_entered" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndPassage" to="." method="_on_end_passage_body_entered"]
+[connection signal="open_door" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/PuzzleTerminal" to="." method="_on_puzzle_terminal_open_door"]

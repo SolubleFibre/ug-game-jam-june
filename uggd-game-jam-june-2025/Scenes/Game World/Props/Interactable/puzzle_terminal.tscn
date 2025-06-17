@@ -1,0 +1,198 @@
+[gd_scene load_steps=31 format=4 uid="uid://d1e6eua7kahw4"]
+
+[ext_resource type="Shader" uid="uid://c1ndqxeif1mq6" path="res://Misc/Shaders/crt_screen.tres" id="1_cmqdn"]
+[ext_resource type="Script" uid="uid://cghqps0hcjdr4" path="res://Scripts/Props/Interactables/puzzle_terminal.gd" id="1_iu2y0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_538ft"]
+resource_name = "material_0"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ocpxh"]
+resource_name = "terminal_mesh"
+_surfaces = [{
+"aabb": AABB(0, -1, -0.625, 1, 1.7, 1.25),
+"attribute_data": PackedByteArray("AAD/X7gex1r///9fAAD/P7geukW4HsdaAABlpv9///8AAP//uB66RQAA/z9G4bpFAAD/PwAAAAD///8/RuG6Rf///z9G4cda//////9//////2WmRuG6RQAA/z////8///8AAP///z8AAAAARuHHWv///z////9fRuHHWv///1+4HsdaAAD/P7gex1oAAP9f//8AAAAAAAD/////AAAAAAAA////////AAAAAAAA////////AAD///////8AAAAAAAAAAAAA////////////////AAAAAAAA//8AAAAAAAD/////AAAAAAAA////////AAAAAP///////wAA////////AAAAAAAAFc8AAP//AAD//////////wAA//8AAAAA//8VzwAA//8AABXPFc///3LlAAD/////AAD/////Fc//////cuUAAP//AAD///////8AAP////8AAAAAAACMGv//AAD//4wa/////3Ll//8VzwAA//8AAAAAjBoAAAAA"),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsAPAA9AD4APwBAAEEAQgBDAEQARQBGAEcASABJAEoASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAXQBeAF8A"),
+"material": SubResource("StandardMaterial3D_538ft"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("//+Vlv//wMhA1sanRuHAyP//lZYAAMDIAAD/////wMjWLR/tRuHAyEDWxqdG4cDIAAD/////AID//5WW//8AgAAAlZb//wCA1i0f7UbhwMgAAP/////AyNYtH+24HsDIAAD///////8AAJWW/////wAA//8AAP//1i0f7bgewMgAAP//AADAyEDWxqe4HsDIAACVlgAA/////5WWAAD//wAA//8AAP//1i0f7bgewMgAAP/////AyAAA//8AAMDIAACVlgAA//8AAP//AAD//wAAlZb/////QNbGp7gewMgAAP//AADAyP//lZYAAMDIQNbGp7gewMj//5WWAADAyEDWxqdG4cDIAAD/////wMhA1sanRuHAyP//lZb//8DI//8AAP//qSr//5WW//+pKv//AAAAAKkq//+Vlv//AAD//wAA//8AAAAAAAD//wAAAAAAAP//qir//wAA//+qKv//AAAAAKoq//+VlgAAqSr//wAAAACpKv//lZb//6kq//8AAAAAAAD//5WWAAAAAAAAlZYAAAAAAACVlgAAAAAAAAAAAAAAAP//AAAAAAAAAACVlv//AAD//5WW//8AAAAAAAD//wAAAACVlgAAqioAAJWW//+qKgAAAAD//6oqAAAAAP//qir//wAAAACqKgAAAAAAAKoqAAAAAP//qioAAAAAAACqKgAAlZYAAKoq1i0f7Ubh//9FGjDZRuH//6HL9JxG4f//ocv0nEbhusJFGjDZRuG6wkUaMNm4HrrC1i0f7bgeusJFGjDZRuG6wtYtH+1G4brC1i0f7bgeVNVA1sanuB5U1UUaMNm4HlTVRRow2UbhusLWLR/tuB66wkUaMNm4HrrCQNbGp7geVNWhy/ScuB5U1UUaMNm4HlTVocv0nLgeusKhy/ScRuG6wkUaMNm4HrrCQNbGp0bhAPGhy/ScuB4A8UDWxqe4HgDxocv0nEbh//9A1sanRuH//9YtH+1G4f//ocv0nLgeAPFA1sanRuEA8aHL9JxG4QDxSsGlIErBpSBKwaUgSsGlIErBpSBKwaUgAAD/fwAA/38AAP9/SsGlIErBpSBKwaUg////v////7////+/S8GmIEvBpiBLwaYg/38AAP9/AAD/fwAASsGlIErBpSBKwaUg////v////7////+/SsGlIErBpSBKwaUgSsGlIErBpSBKwaUgS8GmIEvBpiBLwaYgqqpVVaqqVVWqqlVV/38AAP9/AAD/fwAAVFVUVVRVVFVUVVRVqqpVVaqqVVWqqlVV/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAAVVWqqlVVqqpVVaqqVFVUVVRVVFVUVVRVVVWqqlVVqqpVVaqq/38AAP9/AAD/fwAAVdOqaVXTqmlV06ppqmmpLKppqSyqaaks/3/+f/9//n//f/5/qmmpLKppqSyqaaks/3/+f/9//n//f/5/VdOqaVXTqmlV06pp3/BwON/wcDjf8HA4/38AAP9/AAD/fwAA3/BwON/wcDjf8HA4")
+}]
+blend_shape_mode = 0
+metadata/extras = {
+"targetNames": []
+}
+
+[sub_resource type="Gradient" id="Gradient_iu2y0"]
+offsets = PackedFloat32Array(0, 0.566667, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.147672, 0.147672, 0.147672, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dweh1"]
+noise_type = 2
+cellular_jitter = 0.0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_44ksb"]
+color_ramp = SubResource("Gradient_iu2y0")
+noise = SubResource("FastNoiseLite_dweh1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxi8m"]
+albedo_texture = SubResource("NoiseTexture2D_44ksb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jkt37"]
+size = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_cmqdn"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u8frm"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xkouh"]
+height = 8
+seamless = true
+color_ramp = SubResource("Gradient_cmqdn")
+noise = SubResource("FastNoiseLite_u8frm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ua0bc"]
+render_priority = 0
+shader = ExtResource("1_cmqdn")
+shader_parameter/ScrollSpeed = 0.1
+shader_parameter/ScreenTexture = SubResource("NoiseTexture2D_xkouh")
+shader_parameter/ScanLineColor = Color(1, 1, 1, 1)
+shader_parameter/Glow_Power = -0.25
+shader_parameter/Glow_Color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iu2y0"]
+size = Vector3(0.8, 0.3, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_dweh1"]
+colors = PackedColorArray(0.258458, 0.0766928, 0, 1, 0.783033, 0.297082, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_44ksb"]
+noise_type = 2
+cellular_jitter = 0.0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gxi8m"]
+width = 256
+color_ramp = SubResource("Gradient_dweh1")
+noise = SubResource("FastNoiseLite_44ksb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkt37"]
+albedo_color = Color(0.331639, 0.331639, 0.331639, 1)
+albedo_texture = SubResource("NoiseTexture2D_gxi8m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8frm"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xkouh"]
+material = SubResource("StandardMaterial3D_u8frm")
+size = Vector2(0.75, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ua0bc"]
+size = Vector3(0.1, 0.4, 0.9)
+
+[sub_resource type="Gradient" id="Gradient_xli36"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kg27f"]
+noise_type = 2
+cellular_jitter = 0.0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_20lxk"]
+color_ramp = SubResource("Gradient_xli36")
+noise = SubResource("FastNoiseLite_kg27f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mg2t"]
+albedo_color = Color(0.453232, 0.453232, 0.453232, 1)
+albedo_texture = SubResource("NoiseTexture2D_20lxk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvxlm"]
+albedo_color = Color(0.903598, 0.903598, 0.903598, 1)
+roughness = 0.0
+clearcoat_enabled = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_fg457"]
+material = SubResource("StandardMaterial3D_uvxlm")
+inner_radius = 0.1
+outer_radius = 0.15
+rings = 8
+ring_segments = 4
+
+[sub_resource type="Animation" id="Animation_s0vmx"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.357301, 0, 0), Vector3(0.2, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3p1a3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.357301, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_34k12"]
+_data = {
+&"RESET": SubResource("Animation_3p1a3"),
+&"open": SubResource("Animation_s0vmx")
+}
+
+[node name="PuzzleTerminal" type="Node3D"]
+script = ExtResource("1_iu2y0")
+
+[node name="Terminal" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_ocpxh")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_gxi8m")
+
+[node name="Screen" type="MeshInstance3D" parent="Terminal"]
+transform = Transform3D(0.819332, 0.573319, 0, -0.573319, 0.819332, 0, 0, 0, 1, 0.463615, 0.331911, 0)
+mesh = SubResource("PlaneMesh_jkt37")
+surface_material_override/0 = SubResource("ShaderMaterial_ua0bc")
+
+[node name="Drawer" type="Node3D" parent="Terminal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.357301, 0, 0)
+
+[node name="Surface" type="MeshInstance3D" parent="Terminal/Drawer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.303412, 0)
+mesh = SubResource("BoxMesh_iu2y0")
+surface_material_override/0 = SubResource("StandardMaterial3D_jkt37")
+
+[node name="Space" type="MeshInstance3D" parent="Terminal/Drawer/Surface"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152002, 0)
+mesh = SubResource("PlaneMesh_xkouh")
+
+[node name="Front" type="MeshInstance3D" parent="Terminal/Drawer/Surface"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399794, 0, 0)
+mesh = SubResource("BoxMesh_ua0bc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6mg2t")
+
+[node name="Handle" type="MeshInstance3D" parent="Terminal/Drawer/Surface/Front"]
+mesh = SubResource("TorusMesh_fg457")
+
+[node name="DrawerAnims" type="AnimationPlayer" parent="Terminal/Drawer"]
+libraries = {
+&"": SubResource("AnimationLibrary_34k12")
+}

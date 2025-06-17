@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://b16v6scyjab5v"]
+
+[ext_resource type="Script" uid="uid://dmb87bx321532" path="res://Scripts/PipePuzzle/pipe_turn.gd" id="1_rdb8g"]
+[ext_resource type="Texture2D" uid="uid://de2y16bbv5rlu" path="res://Assets/2D/Pipe/straight_pipe_0.png" id="2_6bpd8"]
+[ext_resource type="Texture2D" uid="uid://cqgcq40hgv1c4" path="res://Assets/2D/Pipe/straight_pipe_1.png" id="3_wkxm6"]
+
+[node name="straight_pipe" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -1792.0
+offset_bottom = -952.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rdb8g")
+pipe_textures = Array[Texture2D]([ExtResource("2_6bpd8"), ExtResource("3_wkxm6")])
+
+[node name="pipe_image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_6bpd8")
+
+[node name="Button" type="Button" parent="pipe_image"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.508
+anchor_top = 0.5
+anchor_right = 0.508
+anchor_bottom = 0.5
+offset_left = -32.512
+offset_top = -32.0
+offset_right = -19.512
+offset_bottom = -19.0
+grow_horizontal = 0
+scale = Vector2(5, 5)
+
+[connection signal="pressed" from="pipe_image/Button" to="." method="_on_button_pressed"]

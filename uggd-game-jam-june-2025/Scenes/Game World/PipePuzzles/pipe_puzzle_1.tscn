@@ -1,20 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcwmc2gxtt872"]
+[gd_scene load_steps=5 format=3 uid="uid://dcwmc2gxtt872"]
 
 [ext_resource type="PackedScene" uid="uid://d2mpcmqtrb6ks" path="res://Scenes/Game World/PipePuzzles/end_pipe.tscn" id="1_57qu2"]
+[ext_resource type="Script" uid="uid://bpxsu8arwxnss" path="res://Scripts/PipePuzzle/pipe_puzzle_1.gd" id="1_dgigw"]
+[ext_resource type="PackedScene" uid="uid://b16v6scyjab5v" path="res://Scenes/Game World/PipePuzzles/straight_pipe.tscn" id="1_r7x6o"]
+[ext_resource type="PackedScene" uid="uid://ceyv3hc3ys43r" path="res://Scenes/Game World/PipePuzzles/corner_pipe.tscn" id="3_r7x6o"]
 
-[node name="Pipe Puzzle" type="Control"]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_dgigw")
 
-[node name="0, 0" parent="." instance=ExtResource("1_57qu2")]
+[node name="tile_0_0" parent="." instance=ExtResource("1_57qu2")]
 layout_mode = 1
+offset_top = 128.0
+offset_bottom = -888.0
 
-[node name="0, 1" parent="." instance=ExtResource("1_57qu2")]
+[node name="tile_0_1" parent="." instance=ExtResource("3_r7x6o")]
 layout_mode = 1
 offset_left = 128.0
+offset_top = 128.0
 offset_right = -1728.0
+offset_bottom = -888.0
+
+[node name="tile_0_2" parent="." instance=ExtResource("1_57qu2")]
+layout_mode = 1
+offset_left = 192.0
+offset_top = 128.0
+offset_right = -1664.0
+offset_bottom = -888.0
 pipe_orientation = 1
+
+[node name="tile_1_0" parent="." instance=ExtResource("3_r7x6o")]
+layout_mode = 1
+offset_top = 192.0
+offset_bottom = -824.0
+
+[node name="tile_1_1" parent="." instance=ExtResource("3_r7x6o")]
+layout_mode = 1
+offset_left = 128.0
+offset_top = 192.0
+offset_right = -1728.0
+offset_bottom = -824.0
+pipe_orientation = 1
+
+[node name="tile_1_2" parent="." instance=ExtResource("1_r7x6o")]
+layout_mode = 1
+offset_left = 192.0
+offset_top = 192.0
+offset_right = -1664.0
+offset_bottom = -824.0
+
+[node name="tile_2_0" parent="." instance=ExtResource("3_r7x6o")]
+layout_mode = 1
+offset_top = 256.0
+offset_bottom = -760.0
+
+[node name="tile_2_1" parent="." instance=ExtResource("1_r7x6o")]
+layout_mode = 1
+offset_left = 128.0
+offset_top = 256.0
+offset_right = -1728.0
+offset_bottom = -760.0
+
+[node name="tile_2_2" parent="." instance=ExtResource("3_r7x6o")]
+layout_mode = 1
+offset_left = 192.0
+offset_top = 256.0
+offset_right = -1664.0
+offset_bottom = -760.0
+
+[node name="submit_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 328.0
+offset_bottom = 200.0
+scale = Vector2(2.1, 2.1)
+text = "submit"
+
+[connection signal="gui_input" from="tile_0_0" to="." method="_on_tile_0_0_gui_input"]
+[connection signal="pressed" from="submit_button" to="." method="_on_submit_button_pressed"]

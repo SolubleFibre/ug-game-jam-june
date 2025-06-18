@@ -23,12 +23,12 @@ ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 energy_multiplier = 0.0
 
-[sub_resource type="Sky" id="Sky_a20rb"]
+[sub_resource type="Sky" id="Sky_kfwqi"]
 sky_material = SubResource("ProceduralSkyMaterial_3xfaq")
 
 [sub_resource type="Environment" id="Environment_ltegh"]
 background_mode = 2
-sky = SubResource("Sky_a20rb")
+sky = SubResource("Sky_kfwqi")
 tonemap_mode = 3
 tonemap_white = 6.0
 glow_enabled = true

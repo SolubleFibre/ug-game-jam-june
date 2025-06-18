@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=56 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
+[ext_resource type="Script" uid="uid://bgrcyfn5lgym2" path="res://Scripts/StructurePieces/dark_pool.gd" id="1_fb6wk"]
 [ext_resource type="Shader" uid="uid://chrlj6r1ag25c" path="res://Misc/Shaders/pool_fluid.tres" id="2_vqj53"]
 [ext_resource type="Texture2D" uid="uid://dv3ekftn4ix54" path="res://Assets/2D/Symbol.png" id="3_mwm40"]
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="3_ue03e"]
@@ -467,6 +468,8 @@ size = Vector2(3, 0.5)
 size = Vector3(48, 8, 10)
 
 [node name="DarkPool" type="Node3D"]
+script = ExtResource("1_fb6wk")
+keep_loaded = null
 
 [node name="Structure" type="Node3D" parent="."]
 

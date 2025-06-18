@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UGGD-Game-Jam-June-2025"
-run/main_scene="uid://dwrngc1od1182"
+run/main_scene="uid://clkapm6js4o6d"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PuzzleManager="*res://Scripts/puzzle_manager.gd"
+Settings="*res://Scripts/Global/settings.gd"
 
 [display]
 

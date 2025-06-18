@@ -1,0 +1,254 @@
+[gd_scene load_steps=19 format=3 uid="uid://clkapm6js4o6d"]
+
+[ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="1_38aua"]
+[ext_resource type="Script" uid="uid://bi6tqkrniqon5" path="res://Scripts/Menus/main_menu.gd" id="1_penys"]
+[ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="2_pha2q"]
+[ext_resource type="StyleBox" uid="uid://dmcelud5e3r1a" path="res://Misc/Themes/button_theme.tres" id="4_aur2u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pha2q"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
+
+[sub_resource type="Sky" id="Sky_a20rb"]
+sky_material = SubResource("ProceduralSkyMaterial_pha2q")
+
+[sub_resource type="Environment" id="Environment_penys"]
+background_mode = 2
+sky = SubResource("Sky_a20rb")
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission = Color(0.113665, 0.113665, 0.113665, 1)
+volumetric_fog_temporal_reprojection_enabled = false
+adjustment_enabled = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_penys"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aur2u"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 16
+border_width_right = 16
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 16
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 16
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkef"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0.655601, 0.655601, 0.655601, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 16
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 16
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neey8"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fgt5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4kqa"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wi6m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_chkef"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 128
+Button/styles/focus = SubResource("StyleBoxEmpty_penys")
+Button/styles/hover = SubResource("StyleBoxFlat_aur2u")
+Button/styles/normal = ExtResource("4_aur2u")
+Button/styles/pressed = SubResource("StyleBoxFlat_chkef")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_neey8")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_4fgt5")
+HSlider/styles/slider = SubResource("StyleBoxFlat_j4kqa")
+Panel/styles/panel = SubResource("StyleBoxFlat_5wi6m")
+
+[sub_resource type="Animation" id="Animation_penys"]
+resource_name = "appear"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MenuElements/Border/PlayButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MenuElements/Border/ExitButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aur2u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MenuElements/Border/PlayButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MenuElements/Border/ExitButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5wi6m"]
+_data = {
+&"RESET": SubResource("Animation_aur2u"),
+&"appear": SubResource("Animation_penys")
+}
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_penys")
+
+[node name="Pixelizer" type="SubViewportContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="Pixelizer"]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Pixelizer/SubViewport"]
+environment = SubResource("Environment_penys")
+
+[node name="DarkPool" parent="Pixelizer/SubViewport" instance=ExtResource("1_38aua")]
+current_state = 1
+keep_loaded = true
+
+[node name="Wall" parent="Pixelizer/SubViewport/DarkPool" instance=ExtResource("2_pha2q")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 6, 0, 0)
+
+[node name="Wall2" parent="Pixelizer/SubViewport/DarkPool" instance=ExtResource("2_pha2q")]
+transform = Transform3D(1.31134e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -1.31134e-07, -5.73206e-15, -6, 0, 0)
+
+[node name="Camera" type="Camera3D" parent="Pixelizer/SubViewport"]
+transform = Transform3D(0.755773, 0.307022, -0.578398, -0.226381, 0.951315, 0.209167, 0.614458, -0.0271449, 0.788483, -3.45158, 2.50849, 5.01375)
+
+[node name="MenuElements" type="Node2D" parent="."]
+
+[node name="Border" type="Panel" parent="MenuElements"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = SubResource("Theme_chkef")
+metadata/_edit_lock_ = true
+
+[node name="PlayButton" type="Button" parent="MenuElements/Border"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1577.0
+offset_top = 346.0
+offset_right = 1882.0
+offset_bottom = 538.0
+text = "Play"
+
+[node name="ExitButton" type="Button" parent="MenuElements/Border"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1522.0
+offset_top = 588.0
+offset_right = 1827.0
+offset_bottom = 780.0
+text = "Exit
+"
+
+[node name="MouseSlider" type="HSlider" parent="MenuElements/Border"]
+visible = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 968.0
+offset_right = 902.0
+offset_bottom = 1097.0
+min_value = 300.0
+max_value = 1500.0
+value = 700.0
+
+[node name="Modulator" type="CanvasModulate" parent="."]
+
+[node name="Anims" type="AnimationPlayer" parent="Modulator"]
+libraries = {
+&"": SubResource("AnimationLibrary_5wi6m")
+}
+autoplay = "appear"
+
+[connection signal="pressed" from="MenuElements/Border/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuElements/Border/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="animation_finished" from="Modulator/Anims" to="." method="_on_anims_animation_finished"]

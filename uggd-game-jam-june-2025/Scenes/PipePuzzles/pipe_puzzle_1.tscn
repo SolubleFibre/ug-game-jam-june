@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfvfauq7443fd"]
 
-[ext_resource type="Script" uid="uid://bpxsu8arwxnss" path="res://Scripts/PipePuzzle/pipe_puzzle_0.gd" id="1_nrlgn"]
+[ext_resource type="Script" uid="uid://bpxsu8arwxnss" path="res://Scripts/PipePuzzle/pipe_puzzle_1.gd" id="1_nrlgn"]
 [ext_resource type="PackedScene" uid="uid://d2mpcmqtrb6ks" path="res://Scenes/PipePuzzles/Tiles/end_pipe.tscn" id="2_kah4h"]
 [ext_resource type="PackedScene" uid="uid://ceyv3hc3ys43r" path="res://Scenes/PipePuzzles/Tiles/corner_pipe.tscn" id="3_3gpl3"]
 [ext_resource type="Texture2D" uid="uid://5fdxgpdsk1rc" path="res://Assets/2D/Pipe/button_wrong.png" id="3_qhhyh"]
@@ -14,14 +14,20 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1560.0
+offset_top = 898.0
+offset_right = 111.0
+offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_nrlgn")
 puzzle_guess_checker_display = Array[Texture2D]([ExtResource("3_qhhyh"), ExtResource("3_v7m43")])
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(464, 424)
-scale = Vector2(59, 54)
+visible = false
+position = Vector2(340, 340)
+scale = Vector2(43.3125, 44.8125)
 texture = ExtResource("4_b1hg8")
 
 [node name="tile_0_0" parent="." instance=ExtResource("2_kah4h")]
@@ -29,6 +35,7 @@ layout_mode = 1
 offset_right = -448.0
 offset_bottom = -448.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_0_1" parent="." instance=ExtResource("3_3gpl3")]
 layout_mode = 1
@@ -36,6 +43,7 @@ offset_left = 192.0
 offset_right = -320.0
 offset_bottom = -448.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_0_2" parent="." instance=ExtResource("2_kah4h")]
 layout_mode = 1
@@ -44,6 +52,7 @@ offset_right = -192.0
 offset_bottom = -448.0
 scale = Vector2(2, 2)
 pipe_orientation = 1
+metadata/_edit_lock_ = true
 
 [node name="tile_1_0" parent="." instance=ExtResource("3_3gpl3")]
 layout_mode = 1
@@ -51,6 +60,7 @@ offset_top = 192.0
 offset_right = -448.0
 offset_bottom = -320.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_1_1" parent="." instance=ExtResource("3_3gpl3")]
 layout_mode = 1
@@ -60,6 +70,7 @@ offset_right = -320.0
 offset_bottom = -320.0
 scale = Vector2(2, 2)
 pipe_orientation = 1
+metadata/_edit_lock_ = true
 
 [node name="tile_1_2" parent="." instance=ExtResource("4_g1tva")]
 layout_mode = 1
@@ -68,6 +79,7 @@ offset_top = 192.0
 offset_right = -192.0
 offset_bottom = -320.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_2_0" parent="." instance=ExtResource("3_3gpl3")]
 layout_mode = 1
@@ -75,6 +87,7 @@ offset_top = 320.0
 offset_right = -448.0
 offset_bottom = -192.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_2_1" parent="." instance=ExtResource("4_g1tva")]
 layout_mode = 1
@@ -83,6 +96,7 @@ offset_top = 320.0
 offset_right = -320.0
 offset_bottom = -192.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="tile_2_2" parent="." instance=ExtResource("3_3gpl3")]
 layout_mode = 1
@@ -91,13 +105,14 @@ offset_top = 320.0
 offset_right = -192.0
 offset_bottom = -192.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="submit_button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 194.0
-offset_top = 512.0
-offset_right = 258.0
-offset_bottom = 576.0
+offset_left = -140.0
+offset_top = 194.667
+offset_right = -76.0
+offset_bottom = 258.667
 scale = Vector2(2, 1.979)
 icon = ExtResource("7_hsqa1")
 icon_alignment = 1
@@ -105,10 +120,10 @@ expand_icon = true
 
 [node name="SubmissionDisplay" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 192.0
-offset_right = 576.0
-offset_bottom = 256.0
+offset_left = 22.0
+offset_top = 198.0
+offset_right = 86.0
+offset_bottom = 262.0
 scale = Vector2(1.99, 2)
 texture = ExtResource("3_qhhyh")
 

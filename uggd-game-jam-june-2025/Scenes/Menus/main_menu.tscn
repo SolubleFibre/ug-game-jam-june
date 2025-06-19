@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://clkapm6js4o6d"]
+[gd_scene load_steps=27 format=3 uid="uid://clkapm6js4o6d"]
 
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="1_38aua"]
 [ext_resource type="Script" uid="uid://bi6tqkrniqon5" path="res://Scripts/Menus/main_menu.gd" id="1_penys"]
 [ext_resource type="PackedScene" uid="uid://c5k3mj7fjvpqn" path="res://Scenes/Game World/StructurePieces/wall.tscn" id="2_pha2q"]
 [ext_resource type="StyleBox" uid="uid://dmcelud5e3r1a" path="res://Misc/Themes/button_theme.tres" id="4_aur2u"]
+[ext_resource type="PackedScene" uid="uid://d3hlnv1abs2r7" path="res://Scenes/Menus/settings.tscn" id="5_5wi6m"]
+[ext_resource type="AudioStream" uid="uid://dcflkooe1ae8x" path="res://Assets/Audio/Music/Changing Winds, Shifting Tides.mp3" id="6_chkef"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pha2q"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -54,17 +56,54 @@ corner_radius_bottom_left = 16
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neey8"]
-bg_color = Color(1, 1, 1, 1)
-border_width_top = 4
-border_width_bottom = 4
+[sub_resource type="Gradient" id="Gradient_5wi6m"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fgt5"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_chkef"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_neey8"]
+width = 32
+height = 32
+seamless = true
+color_ramp = SubResource("Gradient_5wi6m")
+noise = SubResource("FastNoiseLite_chkef")
+
+[sub_resource type="Gradient" id="Gradient_4fgt5"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j4kqa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_anmaw"]
+width = 32
+height = 32
+seamless = true
+color_ramp = SubResource("Gradient_4fgt5")
+noise = SubResource("FastNoiseLite_j4kqa")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_chkef"]
+color = Color(1, 1, 1, 1)
+thickness = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4kqa"]
-bg_color = Color(0, 0, 0, 1)
+content_margin_bottom = 8.0
+bg_color = Color(0.0214347, 0.0214346, 0.0214347, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neey8"]
+bg_color = Color(0, 0, 0, 0.439216)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wi6m"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -82,51 +121,13 @@ Button/styles/focus = SubResource("StyleBoxEmpty_penys")
 Button/styles/hover = SubResource("StyleBoxFlat_aur2u")
 Button/styles/normal = ExtResource("4_aur2u")
 Button/styles/pressed = SubResource("StyleBoxFlat_chkef")
-HSlider/styles/grabber_area = SubResource("StyleBoxFlat_neey8")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_4fgt5")
+HSlider/icons/grabber = SubResource("NoiseTexture2D_neey8")
+HSlider/icons/grabber_highlight = SubResource("NoiseTexture2D_anmaw")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_chkef")
 HSlider/styles/slider = SubResource("StyleBoxFlat_j4kqa")
+Label/font_sizes/font_size = 64
+Label/styles/normal = SubResource("StyleBoxFlat_neey8")
 Panel/styles/panel = SubResource("StyleBoxFlat_5wi6m")
-
-[sub_resource type="Animation" id="Animation_penys"]
-resource_name = "appear"
-length = 3.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../MenuElements/Border/PlayButton:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../MenuElements/Border/ExitButton:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(2.5, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_aur2u"]
 length = 0.001
@@ -165,6 +166,95 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../MenuElements/Border/Settings:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Music:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_penys"]
+resource_name = "appear"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MenuElements/Border/PlayButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MenuElements/Border/ExitButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.3, 2.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../MenuElements/Border/Settings:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.6, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Music:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-50.0, -5.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5wi6m"]
@@ -230,16 +320,8 @@ offset_bottom = 780.0
 text = "Exit
 "
 
-[node name="MouseSlider" type="HSlider" parent="MenuElements/Border"]
-visible = false
-layout_mode = 0
-offset_left = 43.0
-offset_top = 968.0
-offset_right = 902.0
-offset_bottom = 1097.0
-min_value = 300.0
-max_value = 1500.0
-value = 700.0
+[node name="Settings" parent="MenuElements/Border" instance=ExtResource("5_5wi6m")]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Modulator" type="CanvasModulate" parent="."]
 
@@ -248,6 +330,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_5wi6m")
 }
 autoplay = "appear"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_chkef")
+volume_db = -80.0
+pitch_scale = 1.2
+autoplay = true
+mix_target = 1
+bus = &"FilteredMusic"
 
 [connection signal="pressed" from="MenuElements/Border/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuElements/Border/ExitButton" to="." method="_on_exit_button_pressed"]

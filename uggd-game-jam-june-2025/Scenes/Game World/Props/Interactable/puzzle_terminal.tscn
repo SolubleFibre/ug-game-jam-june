@@ -49,7 +49,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u8frm"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xkouh"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iu2y0"]
 height = 8
 seamless = true
 color_ramp = SubResource("Gradient_cmqdn")
@@ -59,7 +59,7 @@ noise = SubResource("FastNoiseLite_u8frm")
 render_priority = 0
 shader = ExtResource("1_cmqdn")
 shader_parameter/ScrollSpeed = 0.1
-shader_parameter/ScreenTexture = SubResource("NoiseTexture2D_xkouh")
+shader_parameter/ScreenTexture = SubResource("NoiseTexture2D_iu2y0")
 shader_parameter/ScanLineColor = Color(1, 1, 1, 1)
 shader_parameter/Glow_Power = -0.25
 shader_parameter/Glow_Color = Color(1, 1, 0, 1)

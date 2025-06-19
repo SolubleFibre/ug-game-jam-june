@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwrngc1od1182"]
+[gd_scene load_steps=23 format=3 uid="uid://dwrngc1od1182"]
 
 [ext_resource type="Script" uid="uid://dxvpal4gy1a5x" path="res://Scripts/Systems/loop_manager.gd" id="1_0mi7y"]
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="2_bqo8f"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cpvdtn7iwn4e0" path="res://Scenes/Game World/StructurePieces/end_door.tscn" id="11_dpgss"]
 [ext_resource type="PackedScene" uid="uid://15rnsbv4wtv8" path="res://Scenes/Game World/StructurePieces/end_passage.tscn" id="12_kfwqi"]
 [ext_resource type="PackedScene" uid="uid://dq7qe05q0d18e" path="res://Scenes/Game World/Props/Interactable/puzzle_piece.tscn" id="13_x0fxp"]
+[ext_resource type="PackedScene" uid="uid://1i1uswkyqny7" path="res://Scenes/PipePuzzles/PipePuzzle1.tscn" id="16_a733g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -290,6 +291,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90289, 0.893637, -3.75796)
 [node name="PuzzlePiece3" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection" instance=ExtResource("13_x0fxp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.166, 0.893637, 0.146971)
 
+[node name="PipePuzzles" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions/Puzzles"]
+
 [node name="Player" parent="Pixelizer/SubViewport" instance=ExtResource("2_jk7sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8614, 1.29353, 40)
 SPEED = 6
@@ -304,6 +307,9 @@ color = Color(1, 1, 1, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_a733g")
 }
+
+[node name="Computer" parent="." instance=ExtResource("16_a733g")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -42.1051, 0, 38.7417)
 
 [connection signal="body_entered" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndPassage" to="." method="_on_end_passage_body_entered"]
 [connection signal="open_door" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/PuzzleTerminal" to="." method="_on_puzzle_terminal_open_door"]

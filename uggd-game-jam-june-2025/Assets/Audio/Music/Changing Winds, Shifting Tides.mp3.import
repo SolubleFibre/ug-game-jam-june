@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dcflkooe1ae8x"
+path="res://.godot/imported/Changing Winds, Shifting Tides.mp3-181a8560675c418f863fb3921044e01f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/Changing Winds, Shifting Tides.mp3"
+dest_files=["res://.godot/imported/Changing Winds, Shifting Tides.mp3-181a8560675c418f863fb3921044e01f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

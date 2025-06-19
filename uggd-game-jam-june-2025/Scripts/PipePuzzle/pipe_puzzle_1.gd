@@ -35,7 +35,6 @@ func _on_submit_button_pressed():
 		pipe_2_0, pipe_2_1, pipe_2_2,
 	]
 
-
 	if puzzle_answer == player_answer:
 		#play correct sfx
 		$SubmissionDisplay.texture = puzzle_guess_checker_display[1]

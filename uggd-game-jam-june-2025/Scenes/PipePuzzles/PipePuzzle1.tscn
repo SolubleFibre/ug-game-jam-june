@@ -1,32 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://1i1uswkyqny7"]
+[gd_scene load_steps=11 format=3 uid="uid://1i1uswkyqny7"]
 
 [ext_resource type="PackedScene" uid="uid://4hk14ttdrl8b" path="res://Assets/3D/In-Engine/Computer.glb" id="1_jocfl"]
 [ext_resource type="PackedScene" uid="uid://bfvfauq7443fd" path="res://Scenes/PipePuzzles/pipe_puzzle_1.tscn" id="2_j204t"]
+[ext_resource type="Shader" uid="uid://c1ndqxeif1mq6" path="res://Misc/Shaders/crt_screen.tres" id="3_j204t"]
+[ext_resource type="PackedScene" uid="uid://c8waw0btw1ieh" path="res://Scenes/Systems/menu_opener.tscn" id="4_ycxkb"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jocfl"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
+[sub_resource type="PlaneMesh" id="PlaneMesh_ycxkb"]
+size = Vector2(1.7, 2)
+
+[sub_resource type="Gradient" id="Gradient_7p7ln"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hv3sf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u0ioc"]
+width = 256
+height = 8
+seamless = true
+color_ramp = SubResource("Gradient_7p7ln")
+noise = SubResource("FastNoiseLite_hv3sf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_up65l"]
+render_priority = 0
+shader = ExtResource("3_j204t")
+shader_parameter/ScrollSpeed = 0.1
+shader_parameter/ScreenTexture = SubResource("NoiseTexture2D_u0ioc")
+shader_parameter/ScanLineColor = Color(1, 1, 1, 1)
+shader_parameter/Glow_Power = -0.25
+shader_parameter/Glow_Color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7p7ln"]
+size = Vector3(3.06201, 2.93286, 3.53625)
 
 [node name="Computer" instance=ExtResource("1_jocfl")]
 
 [node name="display" parent="." index="2"]
 transform = Transform3D(0.995457, 0, 0, 0, 0, -0.995457, 0, 0.995457, 0, 0, 1.30001, 0.877605)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="3"]
-texture_filter = 1
-offset_left = 2336.0
-offset_top = 1640.0
-offset_right = 3080.0
-offset_bottom = 2384.0
-stretch = true
+[node name="Screen" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 1.33509, 0.947636)
+mesh = SubResource("PlaneMesh_ycxkb")
+surface_material_override/0 = SubResource("ShaderMaterial_up65l")
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
-handle_input_locally = false
-size = Vector2i(744, 744)
-render_target_update_mode = 4
+[node name="MenuOpener" parent="." index="4" instance=ExtResource("4_ycxkb")]
+ui_scene = ExtResource("2_j204t")
 
-[node name="pipe_puzzle_1" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("2_j204t")]
-
-[node name="puzzle_sprite" type="Sprite3D" parent="." index="4"]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.082, 0, 1.26074, 0.930309)
-pixel_size = 0.0285
-texture = SubResource("ViewportTexture_jocfl")
+[node name="Hitbox" type="CollisionShape3D" parent="MenuOpener" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3866, 1.4388)
+shape = SubResource("BoxShape3D_7p7ln")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false

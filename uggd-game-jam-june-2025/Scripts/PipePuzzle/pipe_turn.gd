@@ -18,4 +18,3 @@ func _on_button_pressed():
 	else:
 		pipe_orientation = (pipe_orientation + 1) % pipe_textures.size()
 		$pipe_image.texture = pipe_textures[pipe_orientation]
-		print(pipe_orientation)

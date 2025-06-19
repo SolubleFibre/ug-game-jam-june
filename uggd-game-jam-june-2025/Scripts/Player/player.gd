@@ -20,12 +20,12 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Settings.player_can_move:
 		velocity.y = JUMP_VELOCITY
 
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction and Settings.player_can_move:
 		$CameraAnims.play("view_bob")
 		$FlashlightAnims.play("bob")
 		velocity.x = direction.x * SPEED * sprinting_speed
@@ -39,7 +39,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		rotation.y -= event.relative.x / 700
-		$Camera.rotation.x -= event.relative.y / 700
+	if event is InputEventMouseMotion and Settings.player_can_move:
+		rotation.y -= event.relative.x / Settings.mouse_sensitivity
+		$Camera.rotation.x -= event.relative.y / Settings.mouse_sensitivity
 		$Camera.rotation.x = clamp($Camera.rotation.x, deg_to_rad(-65), deg_to_rad(90))

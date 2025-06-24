@@ -28,7 +28,6 @@ func loop_decider():
 		puzzle_terminal.collect_amount = 3
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection.position.y = 0
-		print($Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection.position.y)
 
 func _on_puzzle_terminal_open_door():
 	$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.open_door = true

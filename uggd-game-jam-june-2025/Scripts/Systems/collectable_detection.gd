@@ -11,3 +11,4 @@ func _on_body_entered(_body):
 
 func _on_collect_sfx_finished():
 	queue_free()
+	get_parent_node_3d()

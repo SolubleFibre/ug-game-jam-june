@@ -15,11 +15,13 @@ func _process(_delta):
 	
 	if puzzle_mode == 1 and PuzzleManager.collected == collect_amount:
 		open_door.emit()
+		PuzzleManager.collected = 0
 		if drawer_open:
 			drawer_open = false
 			$Terminal/Drawer/DrawerAnims.play_backwards("open")
 	elif puzzle_mode == 2 and exterior_puzzle_complete:
 		open_door.emit()
+		exterior_puzzle_complete = false
 
 func update():
 	if puzzle_mode == 0:

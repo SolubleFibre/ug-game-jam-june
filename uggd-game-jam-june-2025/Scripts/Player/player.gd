@@ -16,6 +16,10 @@ func _unhandled_input(_event):
 		sprinting_speed = 1
 		$Camera/FovAnims.play_backwards("sprint")
 
+func _process(_delta):
+	var random_pitch = randf_range(0.8,1.2)
+	$CameraAnims/Footsteps.pitch_scale = random_pitch
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta

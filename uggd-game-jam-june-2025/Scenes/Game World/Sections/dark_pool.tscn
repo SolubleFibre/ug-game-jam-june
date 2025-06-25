@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=62 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
 [ext_resource type="Script" uid="uid://bgrcyfn5lgym2" path="res://Scripts/StructurePieces/dark_pool.gd" id="1_fb6wk"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://3lfd1k36qip8" path="res://Scenes/Game World/StructurePieces/pillar.tscn" id="4_kepsw"]
 [ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="5_whnno"]
 [ext_resource type="PackedScene" uid="uid://b3xn7bttigabe" path="res://Scenes/Systems/section_loader.tscn" id="7_op3pd"]
+[ext_resource type="AudioStream" uid="uid://dqas4l6154270" path="res://Assets/Audio/SFX/pool.wav" id="9_83q07"]
+[ext_resource type="PackedScene" uid="uid://u6yphen1ehf6" path="res://Scenes/Systems/input_detector.tscn" id="10_4whl3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqto"]
 resource_name = "material_0"
@@ -314,6 +316,42 @@ shader_parameter/TexturePan = Vector2(0, 0)
 shader_parameter/Texture = ExtResource("3_mwm40")
 shader_parameter/EmissionStrength = 10.0
 
+[sub_resource type="Animation" id="Animation_4whl3"]
+resource_name = "rise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0.3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_puanv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.161889, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l5xy"]
+_data = {
+&"RESET": SubResource("Animation_puanv"),
+&"rise": SubResource("Animation_4whl3")
+}
+
 [sub_resource type="Animation" id="Animation_whnno"]
 length = 0.001
 tracks/0/type = "value"
@@ -467,9 +505,14 @@ size = Vector2(3, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fb6wk"]
 size = Vector3(48, 8, 10)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4whl3"]
+radius = 5.4502
+
 [node name="DarkPool" type="Node3D"]
 script = ExtResource("1_fb6wk")
+current_state = 2
 keep_loaded = null
+collected = null
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -516,11 +559,17 @@ light_energy = 20.0
 omni_range = 5.29058
 
 [node name="Symbol" type="MeshInstance3D" parent="Structure/VoidFluid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161889, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.161889, 0)
 visible = false
 mesh = SubResource("PlaneMesh_ue03e")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_bi78u")
+
+[node name="SymbolAnimation" type="AnimationPlayer" parent="Structure/VoidFluid/Symbol"]
+libraries = {
+&"": SubResource("AnimationLibrary_1l5xy")
+}
+speed_scale = 0.1
 
 [node name="PoolStates" type="AnimationPlayer" parent="Structure/VoidFluid"]
 libraries = {
@@ -559,3 +608,20 @@ disabled_node = NodePath("../Structure")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 shape = SubResource("BoxShape3D_fb6wk")
 debug_fill = false
+
+[node name="PoolSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_83q07")
+max_distance = 12.0
+bus = &"FilteredSFX"
+
+[node name="InputDetector" parent="." instance=ExtResource("10_4whl3")]
+collision_layer = 4
+
+[node name="Hitbox" type="CollisionShape3D" parent="InputDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+shape = SubResource("CylinderShape3D_4whl3")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[connection signal="finished" from="PoolSound" to="." method="_on_pool_sound_finished"]
+[connection signal="open_ui" from="InputDetector" to="." method="_on_input_detector_open_ui"]

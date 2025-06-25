@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cpvdtn7iwn4e0"]
+[gd_scene load_steps=18 format=3 uid="uid://cpvdtn7iwn4e0"]
 
 [ext_resource type="Script" uid="uid://cvwdssl26x7bc" path="res://Scripts/StructurePieces/end_door.gd" id="1_74kqm"]
 [ext_resource type="Material" uid="uid://c3y3lp365scf1" path="res://Assets/Materials/wall.tres" id="2_t3q32"]
 [ext_resource type="Texture2D" uid="uid://bllv6fevoqhj3" path="res://Assets/2D/WallTexture1.png" id="3_ymuww"]
 [ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="4_q0xo3"]
-[ext_resource type="AudioStream" uid="uid://bqtege05ty4o4" path="res://Assets/Audio/SFX/stone_slide_sfx.mp3" id="5_t3q32"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jdsbv"]
 material = ExtResource("2_t3q32")
@@ -83,18 +82,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../DoorOpened:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_5q3e3"]
 resource_name = "open"
@@ -121,18 +108,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-2, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../DoorOpened:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_er00x"]
@@ -276,8 +251,3 @@ libraries = {
 &"": SubResource("AnimationLibrary_er00x")
 }
 speed_scale = 0.25
-
-[node name="DoorOpened" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_t3q32")
-volume_db = -10.0
-bus = &"FilteredSFX"

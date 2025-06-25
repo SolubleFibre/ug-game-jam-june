@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwrngc1od1182"]
+[gd_scene load_steps=34 format=3 uid="uid://dwrngc1od1182"]
 
 [ext_resource type="Script" uid="uid://dxvpal4gy1a5x" path="res://Scripts/Systems/loop_manager.gd" id="1_0mi7y"]
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="2_bqo8f"]
@@ -15,6 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://cpvdtn7iwn4e0" path="res://Scenes/Game World/StructurePieces/end_door.tscn" id="11_dpgss"]
 [ext_resource type="PackedScene" uid="uid://15rnsbv4wtv8" path="res://Scenes/Game World/StructurePieces/end_passage.tscn" id="12_kfwqi"]
 [ext_resource type="PackedScene" uid="uid://dq7qe05q0d18e" path="res://Scenes/Game World/Props/Interactable/puzzle_piece.tscn" id="13_x0fxp"]
+[ext_resource type="PackedScene" uid="uid://412u2kngk5vk" path="res://Scenes/Game World/Props/Interactable/smelting_cauldron.tscn" id="15_2yoa6"]
+[ext_resource type="PackedScene" uid="uid://judd7x3os15u" path="res://Scenes/Menus/UI Elements/subtext.tscn" id="16_17kvb"]
+[ext_resource type="PackedScene" uid="uid://y5ij5x8hlelg" path="res://Scenes/Game World/Props/Interactable/collectable_ingot.tscn" id="16_d6f3b"]
+[ext_resource type="PackedScene" uid="uid://be58cqgkgkxe4" path="res://Scenes/Game World/Props/blood_stain.tscn" id="17_sg16c"]
+[ext_resource type="PackedScene" uid="uid://djcnfalabyivt" path="res://Scenes/Menus/pause_menu.tscn" id="20_mwgyh"]
+[ext_resource type="PackedScene" uid="uid://bbxtqdvksp4ln" path="res://Scenes/Systems/input_displayer.tscn" id="21_44yhc"]
+[ext_resource type="AudioStream" uid="uid://csn61gmq4qq1u" path="res://Assets/Audio/SFX/start_text_appear.wav" id="21_mwgyh"]
+[ext_resource type="PackedScene" uid="uid://3rpyedmmoy22" path="res://Scenes/Systems/ambience_player.tscn" id="24_cxxyk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -39,6 +47,8 @@ volumetric_fog_emission = Color(0.113665, 0.113665, 0.113665, 1)
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_cxxyk"]
+
 [sub_resource type="Animation" id="Animation_a733g"]
 length = 0.001
 tracks/0/type = "value"
@@ -53,10 +63,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleText/TextAppearSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_kfwqi"]
 resource_name = "restart_loop"
-length = 2.5
+length = 5.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -70,6 +104,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleText/TextAppearSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a733g"]
 _data = {
@@ -77,12 +135,52 @@ _data = {
 &"restart_loop": SubResource("Animation_kfwqi")
 }
 
+[sub_resource type="Animation" id="Animation_17kvb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(399, 431)]
+}
+
+[sub_resource type="Animation" id="Animation_nkn3a"]
+resource_name = "shae"
+length = 1.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0, 0, 0),
+"update": 0,
+"values": [Vector2(1, 429), Vector2(0, 431), Vector2(-1, 433)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2yoa6"]
+_data = {
+&"RESET": SubResource("Animation_17kvb"),
+&"shake": SubResource("Animation_nkn3a")
+}
+
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_0mi7y")
-current_loop = 0
+current_loop = 3
 
 [node name="EditorLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.2773, 0)
+visible = false
 editor_only = true
 
 [node name="Pixelizer" type="SubViewportContainer" parent="."]
@@ -162,6 +260,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, 
 [node name="PoolHall" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions"]
 
 [node name="DarkPool" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("2_bqo8f")]
+collected = 3
 
 [node name="Corridor1" parent="Pixelizer/SubViewport/MazeRegions/PoolHall" instance=ExtResource("2_dbc8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
@@ -292,9 +391,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90289, 0.893637, -3.75796)
 [node name="PuzzlePiece3" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection" instance=ExtResource("13_x0fxp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.166, 0.893637, 0.146971)
 
+[node name="Metallurgy" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions/Puzzles"]
+
+[node name="SmeltingCauldron" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" node_paths=PackedStringArray("ingot_1", "ingot_2", "ingot_3") instance=ExtResource("15_2yoa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.442355, 39)
+ingot_1 = NodePath("../Ingot1")
+ingot_2 = NodePath("../Ingot2")
+ingot_3 = NodePath("../Ingot3")
+
+[node name="Ingot1" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" instance=ExtResource("16_d6f3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.978, 0.5, 27)
+
+[node name="Ingot2" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" instance=ExtResource("16_d6f3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.022, 0.5, 66)
+
+[node name="Ingot3" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" instance=ExtResource("16_d6f3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.022, 0.5, 39)
+
+[node name="BloodStain" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" instance=ExtResource("17_sg16c")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 92.5504, 0.005, 36.6118)
+
+[node name="BloodStain2" parent="Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy" instance=ExtResource("17_sg16c")]
+transform = Transform3D(-0.641913, 0, 1.35571, 0, 1.5, 0, -1.35571, 0, -0.641913, 91.8009, 0.005, 37.7031)
+
+[node name="PoolPuzzle" type="Node3D" parent="Pixelizer/SubViewport/MazeRegions/Puzzles"]
+
 [node name="Player" parent="Pixelizer/SubViewport" instance=ExtResource("2_jk7sn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8614, 1.29353, 40)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -55.8614, 1.29353, 40)
 SPEED = 6
+
+[node name="DisplayerTransformer" type="RemoteTransform3D" parent="Pixelizer/SubViewport/Player"]
+remote_path = NodePath("../../../../InputDisplayer")
+
+[node name="Subtext" parent="." instance=ExtResource("16_17kvb")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("20_mwgyh")]
+
+[node name="InputDisplayer" parent="." instance=ExtResource("21_44yhc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -55.8614, 1.29353, 40)
+
+[node name="Hitbox" type="CollisionShape3D" parent="InputDisplayer"]
+shape = SubResource("SphereShape3D_cxxyk")
+debug_color = Color(1, 1, 1, 0.42)
 
 [node name="Screenfader" type="ColorRect" parent="."]
 offset_right = 1920.0
@@ -306,6 +444,36 @@ color = Color(1, 1, 1, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_a733g")
 }
+autoplay = "restart_loop"
+
+[node name="TitleText" type="Label" parent="Screenfader"]
+visible = false
+layout_mode = 0
+offset_left = 399.0
+offset_top = 431.0
+offset_right = 2319.0
+offset_bottom = 628.0
+theme_override_font_sizes/font_size = 144
+text = "FIND THE DOOR."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleTextAnims" type="AnimationPlayer" parent="Screenfader/TitleText"]
+libraries = {
+&"": SubResource("AnimationLibrary_2yoa6")
+}
+autoplay = "shake"
+speed_scale = 5.0
+
+[node name="TextAppearSound" type="AudioStreamPlayer" parent="Screenfader/TitleText"]
+stream = ExtResource("21_mwgyh")
+pitch_scale = 0.2
+bus = &"FilteredSFX"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+
+[node name="AmbiencePlayer" parent="." instance=ExtResource("24_cxxyk")]
 
 [connection signal="body_entered" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndPassage" to="." method="_on_end_passage_body_entered"]
 [connection signal="open_door" from="Pixelizer/SubViewport/MazeRegions/EndCorridor/PuzzleTerminal" to="." method="_on_puzzle_terminal_open_door"]

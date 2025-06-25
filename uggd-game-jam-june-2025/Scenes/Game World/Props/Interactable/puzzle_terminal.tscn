@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=4 uid="uid://d1e6eua7kahw4"]
+[gd_scene load_steps=33 format=4 uid="uid://d1e6eua7kahw4"]
 
 [ext_resource type="Shader" uid="uid://c1ndqxeif1mq6" path="res://Misc/Shaders/crt_screen.tres" id="1_cmqdn"]
 [ext_resource type="Script" uid="uid://cghqps0hcjdr4" path="res://Scripts/Props/Interactables/puzzle_terminal.gd" id="1_iu2y0"]
+[ext_resource type="AudioStream" uid="uid://bqtege05ty4o4" path="res://Assets/Audio/SFX/stone_slide_sfx.mp3" id="3_dweh1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_538ft"]
 resource_name = "material_0"
@@ -158,6 +159,9 @@ _data = {
 &"open": SubResource("Animation_s0vmx")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_iu2y0"]
+radius = 1.75996
+
 [node name="PuzzleTerminal" type="Node3D"]
 script = ExtResource("1_iu2y0")
 
@@ -168,6 +172,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gxi8m")
 
 [node name="Screen" type="MeshInstance3D" parent="Terminal"]
 transform = Transform3D(0.819332, 0.573319, 0, -0.573319, 0.819332, 0, 0, 0, 1, 0.463615, 0.331911, 0)
+visible = false
 mesh = SubResource("PlaneMesh_jkt37")
 surface_material_override/0 = SubResource("ShaderMaterial_ua0bc")
 
@@ -196,3 +201,21 @@ mesh = SubResource("TorusMesh_fg457")
 libraries = {
 &"": SubResource("AnimationLibrary_34k12")
 }
+
+[node name="Detector" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape3D" parent="Detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.463505, 0, 0)
+shape = SubResource("SphereShape3D_iu2y0")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="DoorOpened" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dweh1")
+volume_db = -10.0
+bus = &"FilteredSFX"
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]

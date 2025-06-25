@@ -1,0 +1,208 @@
+[gd_scene load_steps=21 format=3 uid="uid://djcnfalabyivt"]
+
+[ext_resource type="Script" uid="uid://8c4e0gyjiujd" path="res://Scripts/Menus/pause_menu.gd" id="1_1j166"]
+[ext_resource type="PackedScene" uid="uid://d3hlnv1abs2r7" path="res://Scenes/Menus/settings.tscn" id="2_tf3q2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lso3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as6yf"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 16
+border_width_right = 16
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 16
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 16
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j166"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 24
+border_width_right = 24
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 16
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 16
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tf3q2"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0.655601, 0.655601, 0.655601, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 16
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 16
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="Gradient" id="Gradient_yeo1y"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pw12o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7smr3"]
+width = 32
+height = 32
+seamless = true
+color_ramp = SubResource("Gradient_yeo1y")
+noise = SubResource("FastNoiseLite_pw12o")
+
+[sub_resource type="Gradient" id="Gradient_nwnlq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8kr8e"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cnjyl"]
+width = 32
+height = 32
+seamless = true
+color_ramp = SubResource("Gradient_nwnlq")
+noise = SubResource("FastNoiseLite_8kr8e")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_803fv"]
+color = Color(1, 1, 1, 1)
+thickness = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cpnl"]
+content_margin_bottom = 8.0
+bg_color = Color(0.0214347, 0.0214346, 0.0214347, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldmwc"]
+bg_color = Color(0, 0, 0, 0.439216)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqqat"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_wd28y"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 128
+Button/styles/focus = SubResource("StyleBoxEmpty_lso3q")
+Button/styles/hover = SubResource("StyleBoxFlat_as6yf")
+Button/styles/normal = SubResource("StyleBoxFlat_1j166")
+Button/styles/pressed = SubResource("StyleBoxFlat_tf3q2")
+HSlider/icons/grabber = SubResource("NoiseTexture2D_7smr3")
+HSlider/icons/grabber_highlight = SubResource("NoiseTexture2D_cnjyl")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_803fv")
+HSlider/styles/slider = SubResource("StyleBoxFlat_2cpnl")
+Label/font_sizes/font_size = 64
+Label/styles/normal = SubResource("StyleBoxFlat_ldmwc")
+Panel/styles/panel = SubResource("StyleBoxFlat_cqqat")
+
+[sub_resource type="Animation" id="Animation_1j166"]
+resource_name = "fade_out"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenCover:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tf3q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenCover:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yeo1y"]
+_data = {
+&"RESET": SubResource("Animation_tf3q2"),
+&"fade_out": SubResource("Animation_1j166")
+}
+
+[node name="PauseMenu" type="Node2D"]
+script = ExtResource("1_1j166")
+
+[node name="Blurrer" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.356863)
+
+[node name="Border" type="Panel" parent="."]
+offset_left = 670.0
+offset_top = 128.0
+offset_right = 1210.0
+offset_bottom = 514.0
+theme = SubResource("Theme_wd28y")
+
+[node name="Resume" type="Button" parent="Border"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 42.0
+offset_right = 479.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Quit" type="Button" parent="Border"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 221.0
+offset_right = 479.0
+offset_bottom = 336.0
+theme_override_font_sizes/font_size = 64
+text = "Exit
+"
+
+[node name="Settings" parent="." instance=ExtResource("2_tf3q2")]
+offset_left = -69.0
+offset_top = -35.0
+offset_right = -29.0
+offset_bottom = 5.0
+
+[node name="ScreenCover" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yeo1y")
+}
+
+[connection signal="pressed" from="Border/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Border/Quit" to="." method="_on_quit_pressed"]
+[connection signal="animation_finished" from="Anim" to="." method="_on_anim_animation_finished"]

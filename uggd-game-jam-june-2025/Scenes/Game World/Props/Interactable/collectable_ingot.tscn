@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://y5ij5x8hlelg"]
+
+[ext_resource type="Shader" uid="uid://chrlj6r1ag25c" path="res://Misc/Shaders/pool_fluid.tres" id="1_ffvgq"]
+[ext_resource type="Script" uid="uid://chqbkfbtdas2p" path="res://Scripts/Props/Interactables/collectable_ingot.gd" id="2_txvyl"]
+
+[sub_resource type="Gradient" id="Gradient_txvyl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p13gl"]
+noise_type = 3
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gma1s"]
+seamless = true
+color_ramp = SubResource("Gradient_txvyl")
+noise = SubResource("FastNoiseLite_p13gl")
+
+[sub_resource type="Gradient" id="Gradient_o4rsb"]
+offsets = PackedFloat32Array(0.44086, 0.569892)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bqb22"]
+noise_type = 2
+frequency = 0.0247
+fractal_type = 0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0dkx8"]
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_o4rsb")
+noise = SubResource("FastNoiseLite_bqb22")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le7md"]
+render_priority = 0
+shader = ExtResource("1_ffvgq")
+shader_parameter/WavePanning = Vector2(0.02, 0.02)
+shader_parameter/Heightmap = SubResource("NoiseTexture2D_gma1s")
+shader_parameter/HeightMultiplier = Vector3(0, 0.1, 0.1)
+shader_parameter/TexturePan = Vector2(-0.01, 0.1)
+shader_parameter/Texture = SubResource("NoiseTexture2D_0dkx8")
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_31sbp"]
+material = SubResource("ShaderMaterial_le7md")
+size = Vector3(0.5, 0.2, 0.2)
+subdivide_height = 16
+subdivide_depth = 16
+
+[sub_resource type="Animation" id="Animation_txvyl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ffvgq"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p13gl"]
+_data = {
+&"RESET": SubResource("Animation_txvyl"),
+&"rotate": SubResource("Animation_ffvgq")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_txvyl"]
+radius = 0.768761
+
+[node name="CollectableIngot" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_31sbp")
+script = ExtResource("2_txvyl")
+
+[node name="Light" type="OmniLight3D" parent="."]
+omni_range = 1.27625
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p13gl")
+}
+autoplay = "rotate"
+speed_scale = 0.1
+
+[node name="Detector" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape3D" parent="Detector"]
+shape = SubResource("SphereShape3D_txvyl")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

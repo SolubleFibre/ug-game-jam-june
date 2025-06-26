@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://3rpyedmmoy22"]
+
+[ext_resource type="Script" uid="uid://ymgjhyvdje47" path="res://Scripts/Systems/ambience_player.gd" id="1_awxwc"]
+[ext_resource type="AudioStream" uid="uid://cofknbi2gp2vd" path="res://Assets/Audio/SFX/ambience01.wav" id="1_sa5xo"]
+[ext_resource type="AudioStream" uid="uid://cqhxniba52o77" path="res://Assets/Audio/SFX/ambience02.wav" id="2_awxwc"]
+[ext_resource type="AudioStream" uid="uid://8sal2g8dtpbu" path="res://Assets/Audio/SFX/ambience03.wav" id="3_64f7e"]
+
+[node name="AmbiencePlayer" type="Node"]
+script = ExtResource("1_awxwc")
+
+[node name="Sound1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_sa5xo")
+volume_db = -15.0
+pitch_scale = 0.1
+bus = &"FilteredSFX"
+
+[node name="Sound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_awxwc")
+bus = &"FilteredSFX"
+
+[node name="Sound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_64f7e")
+volume_db = -15.0
+bus = &"FilteredSFX"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

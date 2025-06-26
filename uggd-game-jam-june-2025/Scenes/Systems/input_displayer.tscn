@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbxtqdvksp4ln"]
+
+[ext_resource type="Script" uid="uid://bggtwgg1mbak7" path="res://Scripts/Systems/input_displayer.gd" id="1_fkt3m"]
+[ext_resource type="Texture2D" uid="uid://de8r0q7c236u7" path="res://Assets/2D/interact_symbol.png" id="2_4wq0t"]
+
+[node name="InputDisplayer" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_fkt3m")
+
+[node name="InteractSymbol" type="Sprite2D" parent="."]
+position = Vector2(1820, 130)
+texture = ExtResource("2_4wq0t")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

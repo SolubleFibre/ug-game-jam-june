@@ -23,6 +23,6 @@ func _on_exit_button_pressed():
 func _on_anims_animation_finished(_anim_name):
 	if leaving:
 		if exit_code == 1:
-			get_tree().change_scene_to_file("res://Scenes/Game World/main_scene.tscn")
+			get_tree().change_scene_to_file("res://Scenes/Menus/beginning_paragraph.tscn")
 		if exit_code == 2:
 			get_tree().quit()

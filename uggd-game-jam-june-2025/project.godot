@@ -16,11 +16,11 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/fullsize=false
 boot_splash/image="uid://b3phv77j5ylfg"
-config/icon="res://icon.svg"
+config/icon="uid://cd0aa8wpv2m5s"
 
 [autoload]
 
-PuzzleManager="*res://Scripts/puzzle_manager.gd"
+PuzzleManager="*res://Scripts/Global/puzzle_manager.gd"
 Settings="*res://Scripts/Global/settings.gd"
 
 [display]

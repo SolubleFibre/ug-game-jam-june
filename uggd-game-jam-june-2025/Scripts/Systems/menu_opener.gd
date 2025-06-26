@@ -27,3 +27,9 @@ func _on_body_entered(_body):
 
 func _on_body_exited(_body):
 	in_range = false
+
+func _on_anims_animation_finished(_anim_name):
+	if !open:
+		Settings.menu_is_open = false
+	elif open:
+		Settings.menu_is_open = true

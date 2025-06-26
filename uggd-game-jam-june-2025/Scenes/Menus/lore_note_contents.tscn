@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cktgq3heatamp"]
+
+[ext_resource type="Script" uid="uid://b08ld5oqk07oa" path="res://Scripts/Menus/lore_note_contents.gd" id="1_ob2fo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jel4n"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ob2fo"]
+material = SubResource("StandardMaterial3D_jel4n")
+size = Vector2(720, 960)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_7xbpj"]
+offsets = PackedFloat32Array(0, 0.0526316, 0.192982, 0.342105)
+colors = PackedColorArray(0, 0, 0, 1, 0.886275, 0.886275, 0.886275, 0, 0.2484, 0.2484, 0.2484, 1, 0.760784, 0.737255, 0.592157, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oct0m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_updor"]
+color_ramp = SubResource("Gradient_7xbpj")
+noise = SubResource("FastNoiseLite_oct0m")
+
+[node name="LoreNoteContents" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_ob2fo")
+
+[node name="Paper" type="MeshInstance2D" parent="."]
+texture_filter = 1
+position = Vector2(976, 556)
+mesh = SubResource("PlaneMesh_ob2fo")
+texture = SubResource("NoiseTexture2D_updor")
+metadata/_edit_lock_ = true
+
+[node name="LoreText" type="RichTextLabel" parent="Paper"]
+offset_left = -360.0
+offset_top = -480.0
+offset_right = 360.0
+offset_bottom = 480.0
+theme_override_colors/default_color = Color(0, 0, 0, 0.831373)
+theme_override_font_sizes/normal_font_size = 48
+text = "ARE YOU A BOYKISSERRRRRRR??
+:3c"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true

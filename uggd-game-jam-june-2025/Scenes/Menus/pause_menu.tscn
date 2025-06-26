@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://djcnfalabyivt"]
+[gd_scene load_steps=22 format=3 uid="uid://djcnfalabyivt"]
 
 [ext_resource type="Script" uid="uid://8c4e0gyjiujd" path="res://Scripts/Menus/pause_menu.gd" id="1_1j166"]
 [ext_resource type="PackedScene" uid="uid://d3hlnv1abs2r7" path="res://Scenes/Menus/settings.tscn" id="2_tf3q2"]
+[ext_resource type="AudioStream" uid="uid://ojec4xx2xwji" path="res://Assets/Audio/SFX/click.wav" id="3_tf3q2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lso3q"]
 
@@ -114,6 +115,21 @@ Label/font_sizes/font_size = 64
 Label/styles/normal = SubResource("StyleBoxFlat_ldmwc")
 Panel/styles/panel = SubResource("StyleBoxFlat_cqqat")
 
+[sub_resource type="Animation" id="Animation_tf3q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenCover:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_1j166"]
 resource_name = "fade_out"
 length = 3.0
@@ -131,21 +147,6 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_tf3q2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ScreenCover:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yeo1y"]
 _data = {
 &"RESET": SubResource("Animation_tf3q2"),
@@ -158,7 +159,7 @@ script = ExtResource("1_1j166")
 [node name="Blurrer" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
-color = Color(0, 0, 0, 0.356863)
+color = Color(0, 0, 0, 0.65098)
 
 [node name="Border" type="Panel" parent="."]
 offset_left = 670.0
@@ -202,6 +203,11 @@ color = Color(0, 0, 0, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_yeo1y")
 }
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tf3q2")
+volume_db = -15.0
+pitch_scale = 2.0
 
 [connection signal="pressed" from="Border/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Border/Quit" to="." method="_on_quit_pressed"]

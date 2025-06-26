@@ -10,6 +10,7 @@ func _process(_delta):
 
 func _on_open_button_pressed():
 	toggle_current_state()
+	$ButtonPress.play()
 
 func toggle_current_state():
 	if !open:

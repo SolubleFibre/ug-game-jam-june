@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=4 uid="uid://fgut20bgdsvt"]
+[gd_scene load_steps=30 format=4 uid="uid://fgut20bgdsvt"]
 
 [ext_resource type="Script" uid="uid://cu43r5ujoo1fv" path="res://Scripts/Props/Interactables/crt_computer.gd" id="1_c43bm"]
 [ext_resource type="Shader" uid="uid://c1ndqxeif1mq6" path="res://Misc/Shaders/crt_screen.tres" id="1_dk1kl"]
+[ext_resource type="AudioStream" uid="uid://ojec4xx2xwji" path="res://Assets/Audio/SFX/click.wav" id="3_u8ygq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nu5j"]
 resource_name = "material_0"
@@ -303,6 +304,10 @@ debug_color = Color(1, 0, 0, 0.419608)
 debug_fill = false
 
 [node name="ClickSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_u8ygq")
+volume_db = -10.0
+pitch_scale = 2.0
+bus = &"FilteredSFX"
 
 [node name="Anims" type="AnimationPlayer" parent="."]
 libraries = {

@@ -6,7 +6,7 @@ func _ready():
 	visible = false
 
 func _unhandled_input(_event):
-	if !open and Input.is_action_just_pressed("ui_cancel"):
+	if !open and Input.is_action_just_pressed("ui_cancel") and !Settings.menu_is_open:
 		open = true
 		visible = true
 		Settings.player_can_move = false
@@ -22,8 +22,10 @@ func close():
 
 func _on_resume_pressed():
 	close()
+	$ButtonPress.play()
 
 func _on_quit_pressed():
+	$ButtonPress.play()
 	$Anim.play("fade_out")
 
 func _on_anim_animation_finished(_anim_name):

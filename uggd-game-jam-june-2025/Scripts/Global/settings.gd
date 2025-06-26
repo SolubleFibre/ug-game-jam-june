@@ -7,3 +7,7 @@ var dispayed_text = ""
 
 var show_subtext = false
 var subtext_contents = ""
+
+var menu_is_open = false
+
+var lore_text = ""

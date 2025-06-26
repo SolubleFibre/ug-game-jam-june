@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://bginf5vwowtgi"]
+
+[ext_resource type="PackedScene" uid="uid://c8waw0btw1ieh" path="res://Scenes/Systems/menu_opener.tscn" id="1_ii4j2"]
+[ext_resource type="Script" uid="uid://crv58dqri1hlw" path="res://Scripts/Props/Interactables/lore_note.gd" id="1_ioipi"]
+[ext_resource type="PackedScene" uid="uid://u6yphen1ehf6" path="res://Scenes/Systems/input_detector.tscn" id="2_cs6cs"]
+[ext_resource type="PackedScene" uid="uid://cktgq3heatamp" path="res://Scenes/Menus/lore_note_contents.tscn" id="3_bwcwa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bwcwa"]
+radius = 1.38059
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ii4j2"]
+size = Vector2(0.7, 1)
+
+[sub_resource type="Gradient" id="Gradient_ioipi"]
+offsets = PackedFloat32Array(0.166667, 0.566667)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bwcwa"]
+frequency = 0.032
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cs6cs"]
+width = 32
+color_ramp = SubResource("Gradient_ioipi")
+noise = SubResource("FastNoiseLite_bwcwa")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnuyq"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("NoiseTexture2D_cs6cs")
+
+[sub_resource type="Animation" id="Animation_rg76x"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Paper:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.13446, 0, 0), Vector3(1.13446, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Paper:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gyuxl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Paper:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Paper:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nuq65"]
+_data = {
+&"RESET": SubResource("Animation_gyuxl"),
+&"hover": SubResource("Animation_rg76x")
+}
+
+[node name="LoreNote" type="Node3D"]
+script = ExtResource("1_ioipi")
+
+[node name="InputDetector" parent="." instance=ExtResource("2_cs6cs")]
+
+[node name="Hitbox" type="CollisionShape3D" parent="InputDetector"]
+shape = SubResource("SphereShape3D_bwcwa")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="MenuOpener" parent="." instance=ExtResource("1_ii4j2")]
+collision_layer = 4
+ui_scene = ExtResource("3_bwcwa")
+
+[node name="Hitbox" type="CollisionShape3D" parent="MenuOpener"]
+shape = SubResource("SphereShape3D_bwcwa")
+debug_color = Color(1, 1, 1, 0.42)
+debug_fill = false
+
+[node name="Paper" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ii4j2")
+surface_material_override/0 = SubResource("StandardMaterial3D_mnuyq")
+
+[node name="Light" type="OmniLight3D" parent="Paper"]
+transform = Transform3D(-0.701109, 0, -0.713054, 0.646247, 0.422618, -0.63542, 0.30135, -0.906308, -0.296301, 0, -0.0737297, 0.158114)
+light_energy = 2.0
+omni_range = 1.74466
+omni_attenuation = -2.077
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nuq65")
+}
+autoplay = "hover"
+speed_scale = 0.25
+
+[connection signal="open_ui" from="InputDetector" to="." method="_on_input_detector_open_ui"]
+[connection signal="body_entered" from="MenuOpener" to="." method="_on_menu_opener_body_entered"]

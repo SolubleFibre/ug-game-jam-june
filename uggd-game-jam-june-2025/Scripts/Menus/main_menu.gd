@@ -9,12 +9,14 @@ func close_settings():
 		settings_menu.toggle_state = true
 
 func _on_play_button_pressed():
+	$ButtonPress.play()
 	leaving = true
 	exit_code = 1
 	$Modulator/Anims.play_backwards("appear")
 	close_settings()
 
 func _on_exit_button_pressed():
+	$ButtonPress.play()
 	leaving = true
 	exit_code = 2
 	$Modulator/Anims.play_backwards("appear")

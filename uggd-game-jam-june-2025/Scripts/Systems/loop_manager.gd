@@ -10,6 +10,10 @@ func reset_puzzle_postions():
 	$Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection.position.y = 400
 	$Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy.position.y = 450
 	$Pixelizer/SubViewport/MazeRegions/Puzzles/PoolPuzzle.position.y = 500
+	$Pixelizer/SubViewport/MazeRegions/PoolHall/DarkPool.current_state = 0
+	$Pixelizer/SubViewport/MazeRegions/Puzzles/ComputersPuzzle.position.y = 550
+	$Pixelizer/SubViewport/MazeRegions/Puzzles/PipePuzzle.position.y = 600
+	$Pixelizer/SubViewport/MazeRegions/Puzzles/LoreNotes.position.y = 650
 
 func start_new_loop():
 	current_loop += 1
@@ -40,16 +44,43 @@ func loop_decider():
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/Metallurgy.position.y = 0
 	elif current_loop == 4:
-		$Screenfader/TitleText.text = "FEED THE ABYSS."
+		$Screenfader/TitleText.text = "SEEK THE HOLY TEARS."
 		$Pixelizer/SubViewport/MazeRegions/PoolHall/DarkPool.current_state = 1
 		puzzle_terminal.puzzle_mode = 2
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/PoolPuzzle.position.y = 0
+	elif current_loop == 10 or current_loop == 8:
+		$Screenfader/TitleText.text = "ACTIVATE THE DEVICES."
+		puzzle_terminal.puzzle_mode = 1
+		puzzle_terminal.collect_amount = 3
+		puzzle_terminal.update_values = true
+		$Pixelizer/SubViewport/MazeRegions/Puzzles/ComputersPuzzle.position.y = 0
+	elif current_loop == 11:
+		$Screenfader/TitleText.text = "CORRECT THE PIPES."
+		puzzle_terminal.puzzle_mode = 1
+		puzzle_terminal.collect_amount = 1
+		puzzle_terminal.update_values = true
+		$Pixelizer/SubViewport/MazeRegions/Puzzles/PipePuzzle.position.y = 0
+	elif current_loop == 12:
+		$Screenfader/TitleText.text = "RECALL THE PAST."
+		$BackgroundMusic.stop()
+		$LastLoopMusic.play()
+		puzzle_terminal.puzzle_mode = 1
+		puzzle_terminal.collect_amount = 5
+		puzzle_terminal.update_values = true
+		$Pixelizer/SubViewport/MazeRegions/Puzzles/LoreNotes.position.y = 0
 
 func _on_puzzle_terminal_open_door():
 	$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.open_door = true
 
 func _on_end_passage_body_entered(_body):
-	loop_decider()
-	$Screenfader/ScreenAnims.play("restart_loop")
-	$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.close_door = true
+	if current_loop != 12:
+		loop_decider()
+		$Screenfader/ScreenAnims.play("restart_loop")
+		$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.close_door = true
+	elif current_loop == 12:
+		$Screenfader/ScreenAnims.play("end_fade")
+
+func _on_screen_anims_animation_finished(anim_name):
+	if anim_name == "end_fade":
+		get_tree().change_scene_to_file("res://Scenes/Game World/end_scene.tscn")

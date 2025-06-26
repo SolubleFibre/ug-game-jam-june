@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://pkx16atb7mf8"]
+[gd_scene load_steps=63 format=4 uid="uid://pkx16atb7mf8"]
 
 [ext_resource type="Material" uid="uid://daercv2excll5" path="res://Assets/Materials/floor.tres" id="1_8w4o6"]
 [ext_resource type="Script" uid="uid://bgrcyfn5lgym2" path="res://Scripts/StructurePieces/dark_pool.gd" id="1_fb6wk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b3xn7bttigabe" path="res://Scenes/Systems/section_loader.tscn" id="7_op3pd"]
 [ext_resource type="AudioStream" uid="uid://dqas4l6154270" path="res://Assets/Audio/SFX/pool.wav" id="9_83q07"]
 [ext_resource type="PackedScene" uid="uid://u6yphen1ehf6" path="res://Scenes/Systems/input_detector.tscn" id="10_4whl3"]
+[ext_resource type="AudioStream" uid="uid://bxxf5qdlproeh" path="res://Assets/Audio/SFX/item_pickup.wav" id="11_puanv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqto"]
 resource_name = "material_0"
@@ -316,21 +317,6 @@ shader_parameter/TexturePan = Vector2(0, 0)
 shader_parameter/Texture = ExtResource("3_mwm40")
 shader_parameter/EmissionStrength = 10.0
 
-[sub_resource type="Animation" id="Animation_4whl3"]
-resource_name = "rise"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector3(0, -0.1, 0), Vector3(0, 0.3, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_puanv"]
 length = 0.001
 tracks/0/type = "value"
@@ -344,6 +330,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0.161889, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4whl3"]
+resource_name = "rise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0.3, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1l5xy"]
@@ -510,9 +511,7 @@ radius = 5.4502
 
 [node name="DarkPool" type="Node3D"]
 script = ExtResource("1_fb6wk")
-current_state = 2
 keep_loaded = null
-collected = null
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -611,7 +610,8 @@ debug_fill = false
 
 [node name="PoolSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("9_83q07")
-max_distance = 12.0
+pitch_scale = 2.0
+max_distance = 100.0
 bus = &"FilteredSFX"
 
 [node name="InputDetector" parent="." instance=ExtResource("10_4whl3")]
@@ -622,6 +622,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
 shape = SubResource("CylinderShape3D_4whl3")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
+
+[node name="ItemPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_puanv")
+volume_db = -10.0
+bus = &"FilteredSFX"
 
 [connection signal="finished" from="PoolSound" to="." method="_on_pool_sound_finished"]
 [connection signal="open_ui" from="InputDetector" to="." method="_on_input_detector_open_ui"]

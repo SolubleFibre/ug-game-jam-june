@@ -7,6 +7,7 @@ func _unhandled_input(_event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and in_range and !activated:
 		activated = true
 		$Anims.play("activate")
+		PuzzleManager.collected += 1
 
 func _on_detector_body_entered(_body):
 	in_range = true

@@ -1,5 +1,7 @@
 extends Control
 
+var has_been_solved = false
+
 ## This determines the correct answer to the puzzle 
 var puzzle_answer: Array[int]= [
 	1, 2, 2,
@@ -39,6 +41,9 @@ func _on_submit_button_pressed():
 		#play correct sfx
 		$SubmissionDisplay.texture = puzzle_guess_checker_display[1]
 		disable_screen.emit()
+		if !has_been_solved:
+			PuzzleManager.collected += 1
+			has_been_solved = true
 
 	
 	else:

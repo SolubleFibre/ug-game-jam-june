@@ -42,6 +42,7 @@ mesh = SubResource("PlaneMesh_ycxkb")
 surface_material_override/0 = SubResource("ShaderMaterial_up65l")
 
 [node name="MenuOpener" parent="." index="4" instance=ExtResource("4_ycxkb")]
+collision_layer = 4
 ui_scene = ExtResource("2_j204t")
 
 [node name="Hitbox" type="CollisionShape3D" parent="MenuOpener" index="1"]
@@ -49,3 +50,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3866, 1.4388)
 shape = SubResource("BoxShape3D_7p7ln")
 debug_color = Color(1, 1, 1, 0.42)
 debug_fill = false
+
+[node name="ScreenLight" type="SpotLight3D" parent="." index="5"]
+transform = Transform3D(-8.25662e-09, 0.979148, -0.203146, 0.586768, 0.164499, 0.79287, 0.809755, -0.1192, -0.574533, 0.509085, 1.6778, 0)
+light_energy = 2.0
+spot_range = 5.61238
+spot_angle = 53.4375

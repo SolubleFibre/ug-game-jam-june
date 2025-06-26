@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://clkapm6js4o6d"]
+[gd_scene load_steps=28 format=3 uid="uid://clkapm6js4o6d"]
 
 [ext_resource type="PackedScene" uid="uid://pkx16atb7mf8" path="res://Scenes/Game World/Sections/dark_pool.tscn" id="1_38aua"]
 [ext_resource type="Script" uid="uid://bi6tqkrniqon5" path="res://Scripts/Menus/main_menu.gd" id="1_penys"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dmcelud5e3r1a" path="res://Misc/Themes/button_theme.tres" id="4_aur2u"]
 [ext_resource type="PackedScene" uid="uid://d3hlnv1abs2r7" path="res://Scenes/Menus/settings.tscn" id="5_5wi6m"]
 [ext_resource type="AudioStream" uid="uid://dcflkooe1ae8x" path="res://Assets/Audio/Music/Changing Winds, Shifting Tides.mp3" id="6_chkef"]
+[ext_resource type="AudioStream" uid="uid://ojec4xx2xwji" path="res://Assets/Audio/SFX/click.wav" id="7_neey8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pha2q"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -338,6 +339,11 @@ pitch_scale = 1.2
 autoplay = true
 mix_target = 1
 bus = &"FilteredMusic"
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_neey8")
+volume_db = -15.0
+pitch_scale = 2.0
 
 [connection signal="pressed" from="MenuElements/Border/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuElements/Border/ExitButton" to="." method="_on_exit_button_pressed"]

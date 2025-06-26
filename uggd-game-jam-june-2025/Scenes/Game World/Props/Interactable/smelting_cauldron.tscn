@@ -646,7 +646,7 @@ _data = {
 radius = 2.26979
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hh1ia"]
-size = Vector3(1.8, 4.158, 1.8)
+size = Vector3(1.25, 4.158, 1.25)
 
 [node name="SmeltingCauldron" type="Node3D"]
 script = ExtResource("1_p7yts")

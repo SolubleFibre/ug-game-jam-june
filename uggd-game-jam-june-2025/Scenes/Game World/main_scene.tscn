@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bginf5vwowtgi" path="res://Scenes/Game World/Props/Interactable/lore_note.tscn" id="21_aajim"]
 [ext_resource type="AudioStream" uid="uid://csn61gmq4qq1u" path="res://Assets/Audio/SFX/start_text_appear.wav" id="21_mwgyh"]
 [ext_resource type="PackedScene" uid="uid://3rpyedmmoy22" path="res://Scenes/Systems/ambience_player.tscn" id="24_cxxyk"]
-[ext_resource type="AudioStream" uid="uid://da03hv4omh01a" path="res://Assets/Audio/Music/Fallen Realms.mp3" id="28_jng2a"]
+[ext_resource type="AudioStream" uid="uid://e7l5lbtkmthn" path="res://Assets/Audio/Music/Fallen Realms.mp3" id="28_jng2a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3xfaq"]
 sky_top_color = Color(0, 0, 0, 1)

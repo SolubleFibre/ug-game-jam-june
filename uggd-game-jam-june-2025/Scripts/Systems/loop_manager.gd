@@ -28,17 +28,17 @@ func loop_decider():
 	#Do not under any but the most dire situations, mess with the code below.
 	#At your time of reading there may not be much here, but the amount of stuff
 	#that will need to be here is MASSIVE and complex, so, yk, no touchy.
-	if current_loop == 1 or current_loop == 5 or current_loop == 6:
+	if current_loop == 1 or current_loop == 5:
 		$Screenfader/TitleText.text = "FIND THE WAY OUT."
 		puzzle_terminal.puzzle_mode = 0
 		puzzle_terminal.update_values = true
-	elif current_loop == 2 or current_loop == 7:
+	elif current_loop == 2:
 		$Screenfader/TitleText.text = "COLLECT THE PIECES."
 		puzzle_terminal.puzzle_mode = 1
 		puzzle_terminal.collect_amount = 3
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/JigsawCollection.position.y = 0
-	elif current_loop == 3 or current_loop == 9:
+	elif current_loop == 3:
 		$Screenfader/TitleText.text = "SMELT THE METAL."
 		puzzle_terminal.puzzle_mode = 2
 		puzzle_terminal.update_values = true
@@ -49,19 +49,19 @@ func loop_decider():
 		puzzle_terminal.puzzle_mode = 2
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/PoolPuzzle.position.y = 0
-	elif current_loop == 10 or current_loop == 8:
+	elif current_loop == 6:
 		$Screenfader/TitleText.text = "ACTIVATE THE DEVICES."
 		puzzle_terminal.puzzle_mode = 1
 		puzzle_terminal.collect_amount = 3
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/ComputersPuzzle.position.y = 0
-	elif current_loop == 11:
+	elif current_loop == 7:
 		$Screenfader/TitleText.text = "CORRECT THE PIPES."
 		puzzle_terminal.puzzle_mode = 1
 		puzzle_terminal.collect_amount = 1
 		puzzle_terminal.update_values = true
 		$Pixelizer/SubViewport/MazeRegions/Puzzles/PipePuzzle.position.y = 0
-	elif current_loop == 12:
+	elif current_loop == 8:
 		$Screenfader/TitleText.text = "RECALL THE PAST."
 		$BackgroundMusic.stop()
 		$LastLoopMusic.play()
@@ -74,11 +74,11 @@ func _on_puzzle_terminal_open_door():
 	$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.open_door = true
 
 func _on_end_passage_body_entered(_body):
-	if current_loop != 12:
+	if current_loop != 8:
 		loop_decider()
 		$Screenfader/ScreenAnims.play("restart_loop")
 		$Pixelizer/SubViewport/MazeRegions/EndCorridor/LargeHall2/EndDoor.close_door = true
-	elif current_loop == 12:
+	elif current_loop == 8:
 		$Screenfader/ScreenAnims.play("end_fade")
 
 func _on_screen_anims_animation_finished(anim_name):

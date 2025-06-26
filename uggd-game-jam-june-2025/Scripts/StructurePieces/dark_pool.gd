@@ -27,6 +27,7 @@ func _process(_delta):
 	if current_state == 0:
 		pool_state.play("calm")
 		$InputDetector/Hitbox.position.y = -100
+		$PoolSound.stop()
 	elif current_state == 1:
 		pool_state.play("agitated")
 		$InputDetector/Hitbox.position.y = 0

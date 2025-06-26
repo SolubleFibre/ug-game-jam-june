@@ -1,9 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://1i1uswkyqny7"]
+[gd_scene load_steps=16 format=3 uid="uid://1i1uswkyqny7"]
 
 [ext_resource type="PackedScene" uid="uid://4hk14ttdrl8b" path="res://Assets/3D/In-Engine/Computer.glb" id="1_jocfl"]
 [ext_resource type="PackedScene" uid="uid://bfvfauq7443fd" path="res://Scenes/PipePuzzles/pipe_puzzle_1.tscn" id="2_j204t"]
 [ext_resource type="Shader" uid="uid://c1ndqxeif1mq6" path="res://Misc/Shaders/crt_screen.tres" id="3_j204t"]
 [ext_resource type="PackedScene" uid="uid://c8waw0btw1ieh" path="res://Scenes/Systems/menu_opener.tscn" id="4_ycxkb"]
+
+[sub_resource type="Gradient" id="Gradient_ycxkb"]
+offsets = PackedFloat32Array(0.288889, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0.752941, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7p7ln"]
+noise_type = 2
+cellular_jitter = 0.0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hv3sf"]
+color_ramp = SubResource("Gradient_ycxkb")
+noise = SubResource("FastNoiseLite_7p7ln")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ioc"]
+albedo_texture = SubResource("NoiseTexture2D_hv3sf")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ycxkb"]
 size = Vector2(1.7, 2)
@@ -31,10 +47,20 @@ shader_parameter/Glow_Color = Color(1, 1, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7p7ln"]
 size = Vector3(3.06201, 2.93286, 3.53625)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycxkb"]
+size = Vector3(2, 2, 2)
+
 [node name="Computer" instance=ExtResource("1_jocfl")]
+
+[node name="Monitor" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u0ioc")
+
+[node name="Base" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u0ioc")
 
 [node name="display" parent="." index="2"]
 transform = Transform3D(0.995457, 0, 0, 0, 0, -0.995457, 0, 0.995457, 0, 0, 1.30001, 0.877605)
+surface_material_override/0 = SubResource("StandardMaterial3D_u0ioc")
 
 [node name="Screen" type="MeshInstance3D" parent="." index="3"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 1.33509, 0.947636)
@@ -56,3 +82,10 @@ transform = Transform3D(-8.25662e-09, 0.979148, -0.203146, 0.586768, 0.164499, 0
 light_energy = 2.0
 spot_range = 5.61238
 spot_angle = 53.4375
+
+[node name="Collision" type="StaticBody3D" parent="." index="6"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Collision" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12877, 0)
+shape = SubResource("BoxShape3D_ycxkb")
+debug_fill = false

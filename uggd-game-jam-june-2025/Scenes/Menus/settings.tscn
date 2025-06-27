@@ -105,10 +105,10 @@ theme = ExtResource("5_0hoxr")
 
 [node name="ControlsTitle" type="Label" parent="Scaler"]
 layout_mode = 0
-offset_left = 1005.0
-offset_top = -7.0
-offset_right = 1350.0
-offset_bottom = 97.0
+offset_left = 10.0
+offset_top = 183.0
+offset_right = 355.0
+offset_bottom = 287.0
 text = "Controls:"
 
 [node name="ControlsList" type="Label" parent="Scaler/ControlsTitle"]

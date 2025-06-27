@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://3ily30bj051i"]
+[gd_scene load_steps=50 format=4 uid="uid://3ily30bj051i"]
 
 [ext_resource type="Script" uid="uid://y7b1xqmrp81y" path="res://Scripts/Menus/end_scene.gd" id="1_d5e3v"]
 [ext_resource type="Texture2D" uid="uid://cpi5b78kw82mn" path="res://Assets/2D/FloorTile1.png" id="1_ywsg3"]
@@ -164,21 +164,11 @@ density = 5.0
 emission = Color(0.412152, 0.412152, 0.412152, 1)
 edge_fade = 2.0
 
-[sub_resource type="Animation" id="Animation_00wyg"]
-resource_name = "skymovement"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pixelizer/SubViewport/WorldEnvironment:environment:sky_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(6.28319, 6.28319, 6.28319)]
-}
+[sub_resource type="FogMaterial" id="FogMaterial_axuak"]
+density = -8.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_d5e3v"]
+density = 1.5
 
 [sub_resource type="Animation" id="Animation_6u4d6"]
 length = 0.001
@@ -193,6 +183,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_00wyg"]
+resource_name = "skymovement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pixelizer/SubViewport/WorldEnvironment:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 6.28319, 6.28319)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axuak"]
@@ -429,6 +435,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.121, 97)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Pixelizer/SubViewport/Player"]
 remote_path = NodePath("../../../../InputDisplayer")
+
+[node name="FogCarver" type="FogVolume" parent="Pixelizer/SubViewport/Player"]
+size = Vector3(60, 12, 60)
+shape = 2
+material = SubResource("FogMaterial_axuak")
+
+[node name="HiderFog" type="FogVolume" parent="Pixelizer/SubViewport/Player"]
+size = Vector3(80, 12, 80)
+shape = 2
+material = SubResource("FogMaterial_d5e3v")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_wnjoe")

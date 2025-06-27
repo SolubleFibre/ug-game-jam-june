@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 @export var SPEED = 5
-const JUMP_VELOCITY = 4.5
 var sprinting_speed : float = 1
 
 func _ready():
@@ -23,9 +22,6 @@ func _process(_delta):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Settings.player_can_move:
-		velocity.y = JUMP_VELOCITY
 
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

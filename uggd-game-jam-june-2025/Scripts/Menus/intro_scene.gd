@@ -4,3 +4,6 @@ extends Node
 
 func _on_anim_animation_finished(_anim_name):
 	get_tree().change_scene_to_file(scene_path)
+
+func _on_skip_button_pressed():
+	$Anim.speed_scale = 12

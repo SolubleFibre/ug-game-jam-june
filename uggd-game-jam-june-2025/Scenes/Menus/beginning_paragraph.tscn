@@ -1,6 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfrcnm8cgb1vg"]
+[gd_scene load_steps=6 format=3 uid="uid://dfrcnm8cgb1vg"]
 
 [ext_resource type="Script" uid="uid://cptnd0jarr1c5" path="res://Scripts/Menus/intro_scene.gd" id="1_mw88l"]
+[ext_resource type="Theme" uid="uid://bkrj8hvnt7520" path="res://Misc/Themes/ui_theme.tres" id="2_5d6dg"]
+
+[sub_resource type="Animation" id="Animation_5d6dg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_mw88l"]
 resource_name = "appear"
@@ -29,33 +57,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_5d6dg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Text:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0f6n7"]
@@ -87,10 +88,20 @@ and suffer eternally trying to get in. "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SkipButton" type="Button" parent="Text"]
+offset_left = 1669.0
+offset_top = 964.0
+offset_right = 2088.0
+offset_bottom = 1139.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_5d6dg")
+text = "Skip"
+
 [node name="Anim" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_0f6n7")
 }
 autoplay = "appear"
 
+[connection signal="pressed" from="Text/SkipButton" to="." method="_on_skip_button_pressed"]
 [connection signal="animation_finished" from="Anim" to="." method="_on_anim_animation_finished"]
